@@ -1,0 +1,2258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>RDaSH Learning Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 5 (only once) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- FullCalendar CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body>
+  <!-- ======================================================
+=                     NAVIGATION SECTION                  =
+========================================================= -->
+  <header class="nhs-header">
+    <div class="container">
+      <div class="row">
+        <h1>Learning Hub</h1>
+
+      </div>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container px-0 d-flex align-items-center">
+
+          <div class="logo-container me-3" style="width: 100px;">
+            <img src="Assets/LMHub_Logo.png" class="logo esr" alt="Logo 1" />
+            <img src="Assets/LMHub_Logo.png" class="logo nhs" alt="Logo 2" />
+          </div>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse justify-content-center" id="navMenu">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" onclick="showPage('home')">Home</a></li>
+              <li class="nav-item"><a class="nav-link" onclick="showPage('Educator')">Educator</a></li>
+              <li class="nav-item"><a class="nav-link" onclick="showPage('Learner')">Learner</a></li>
+              <li class="nav-item"><a class="nav-link" onclick="showPage('feedback')">Feedback</a></li>
+              <li class="nav-item"><a class="nav-link" onclick="showPage('Course_Catalogue1')">Course Catalogue</a></li>
+              <li class="nav-item"><a class="nav-link" onclick="showPage('Learner_VV')">Video Vault</a></li>
+              <!--<li class="nav-item"><a class="nav-link" onclick="showPage('Informal_Learning')">Informal Learning</a></li>-->
+              <li class="nav-item"><a class="nav-link" onclick="showPage('QI_Page')">Quality Improvement</a></li>
+              <li class="nav-item"><a class="nav-link" onclick="showPage('MAST_Training')">MAST</a></li>
+              <!--<li class="nav-item"><a class="nav-link" onclick="showPage('External_Learning')">Additional Learning</a>
+              </li>-->
+              <li class="nav-item"><a class="nav-link" onclick="showPage('Training_Rooms')">Rooms</a></li>
+              <li class="nav-item"><a class="nav-link" onclick="showPage('FAQs')">FAQs</a></li>
+              <li class="nav-item"><a class="nav-link" href="Volunteers.html">Volunteers</a></li>
+
+
+            </ul>
+          </div>
+
+          <div style="width: 100px;" class="d-none d-lg-block"></div>
+
+        </div>
+      </nav>
+
+      <!-- Combined Toolbar and Search -->
+      <div class="container mt-3">
+        <div class="row align-items-center g-2">
+          <!-- Search Bar (left, stretches as needed) -->
+          <div class="col">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search bar" onkeyup="searchPages()">
+          </div>
+          <!-- Control Panel (right, auto-width) -->
+          <div class="col-auto">
+            <div class="d-flex flex-wrap align-items-center gap-2 control-toolbar p-2 rounded">
+              <!-- Theme Selector -->
+              <label for="themeSelector" class="visually-hidden">Choose Theme</label>
+              <select id="themeSelector" class="form-select form-select-sm w-auto">
+                <option value="blue">💙 NHS Blue</option>
+                <option value="green">💚 NHS Green</option>
+                <option value="calm">🩶 NHS Grey</option>
+                <option value="pink">💗 NHS Pink</option>
+                <option value="purple">💜 NHS Purple</option>
+                <option value="red">❤️ NHS Red</option>
+                <option value="yellow">💛 NHS Yellow</option>
+                <option value="contrast">⚠️ High Contrast</option>
+              </select>
+              <!-- Text Scaling -->
+              <div class="btn-group btn-group-sm" role="group" aria-label="Text Size">
+                <button onclick="setTextSize('scale-small')" class="btn btn-outline-secondary">A–</button>
+                <button onclick="setTextSize('scale-medium')" class="btn btn-outline-secondary">A</button>
+                <button onclick="setTextSize('scale-large')" class="btn btn-outline-secondary">A+</button>
+                <button onclick="setTextSize('scale-xlarge')" class="btn btn-outline-secondary">A++</button>
+              </div>
+              <!-- Dark Mode 
+                <button id="toggleDark" class="btn btn-sm btn-outline-primary">
+                  🌙 Dark Mode
+                </button>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ======================================================
+  = Home SECTION =
+  ========================================================= -->
+  <div id="home" class="page active">
+    <div class="container py-4">
+
+      <div class="row mb-3">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent p-0">
+              <li class="breadcrumb-item active fw-bold text-primary" aria-current="page">
+                <i class="bi bi-house-door-fill me-1"></i> Learning Resource Hub
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row mb-5">
+        <div class="col-12">
+          <div id="hubCarousel" class="carousel slide rounded-4 shadow-lg overflow-hidden" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#hubCarousel" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#hubCarousel" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#hubCarousel" data-bs-slide-to="2"></button>
+            </div>
+
+            <div class="carousel-inner">
+              <div class="carousel-item active" data-bs-interval="5000">
+                <img src="Assets/Slide1.png" class="d-block w-100" alt="Welcome">
+                <div class="carousel-caption d-none d-md-flex text-start align-items-center">
+                  <div class="caption-box glass-effect">
+                    <h2 class="fw-bold">Welcome to the Hub</h2>
+                    <p>Empowering healthcare professionals with essential skills.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-item" data-bs-interval="7000">
+                <img src="Assets/QI_Banner.png" class="d-block w-100" alt="QI Competition">
+                <div class="carousel-caption d-none d-md-flex text-start align-items-center">
+                  <div class="caption-box glass-effect" style="border-left: 5px solid #6f42c1;">
+                    <h2 class="fw-bold mb-3">QI Competition 2026</h2>
+                    <p class="mb-3">Showcase your innovation!</p>
+                    <div class="d-flex gap-2">
+                      <a class="btn btn-primary btn-lg rounded-pill px-4" onclick="showPage('QI_Page')">
+                        <i class=" bi bi-file-pdf me-2"></i>Quality Improvement Training
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="carousel-item" data-bs-interval="6000">
+                <img src="Assets/Slide4.png" class="d-block w-100" alt="Learning Matters">
+                <div class="carousel-caption d-none d-md-flex text-start align-items-center">
+                  <div class="caption-box glass-effect">
+                    <h2 class="fw-bold mb-3">Learning Matters</h2>
+                    <p class="mb-3">Our monthly newsletter with the latest opportunities and updates.</p>
+                    <a class="btn btn-primary btn-lg rounded-pill px-4"
+                      href="Assets/RDaSH Learning Matters January 2026.pdf" target="_blank">
+                      <i class="bi bi-file-pdf me-2"></i>Read Latest Edition
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-8">
+
+          <div class="p-4 bg-light rounded-4 shadow-sm mb-5">
+            <h3 class="fw-bold mb-3"><i class="bi bi-clock-history me-2"></i>What are Learning Half Days?</h3>
+            <p class="lead">RDaSH wants to help all staff learn and grow so every month the trust gives everyone a
+              protected half day just for learning.</p>
+
+            <h4 class="fw-bold mb-3">When are Learning Half Days?</h4>
+            <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#learningHalfDaysModal">
+              <i class="bi bi-calendar-check me-2"></i>Click here for the upcoming Learning Half Days for 2026-2027
+            </button>
+          </div>
+
+          <div class="modal fade" id="learningHalfDaysModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 pb-0">
+                  <div class="d-flex align-items-center">
+                    <div class="bg-primary bg-opacity-10 p-2 rounded-3 me-3">
+                      <i class="bi bi-clock-history text-primary fs-4"></i>
+                    </div>
+                    <h5 class="modal-title fw-bold text-dark">Learning Half Day Schedule</h5>
+                  </div>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                  <p class="text-muted small mb-4 text-center">Please note the alternating morning and afternoon
+                    sessions below.</p>
+                  <div class="learning-half-days-grid p-3 bg-light rounded-4 border">
+                    <div><strong>28 January 2026</strong></div>
+                    <div class="text-end text-primary fw-bold">9am to 1pm</div>
+                    <div><strong>19 February 2026</strong></div>
+                    <div class="text-end text-primary fw-bold">9am to 1pm</div>
+                    <div><strong>17 March 2026</strong></div>
+                    <div class="text-end text-primary fw-bold">9am to 1pm</div>
+                    <hr class="grid-divider my-2">
+                    <hr class="grid-divider my-2">
+                    <div><strong>7 April 2026</strong></div>
+                    <div class="text-end text-info fw-bold">1pm to 5pm</div>
+                    <div><strong>6 May 2026</strong></div>
+                    <div class="text-end text-info fw-bold">1pm to 5pm</div>
+                    <div><strong>11 June 2026</strong></div>
+                    <div class="text-end text-info fw-bold">1pm to 5pm</div>
+                    <div><strong>29 July 2026</strong></div>
+                    <div class="text-end text-info fw-bold">1pm to 5pm</div>
+                    <div><strong>18 August 2026</strong></div>
+                    <div class="text-end text-primary fw-bold">9am to 1pm</div>
+                    <div><strong>30 September 2026</strong></div>
+                    <div class="text-end text-info fw-bold">1pm to 5pm</div>
+                    <div><strong>15 October 2026</strong></div>
+                    <div class="text-end text-primary fw-bold">9am to 1pm</div>
+                    <div><strong>12 November 2026</strong></div>
+                    <div class="text-end text-primary fw-bold">9am to 1pm</div>
+                    <div><strong>1 December 2026</strong></div>
+                    <div class="text-end text-info fw-bold">1pm to 5pm</div>
+                    <div><strong>14 January 2027</strong></div>
+                    <div class="text-end text-primary fw-bold">9am to 1pm</div>
+                    <div><strong>16 February 2027</strong></div>
+                    <div class="text-end text-primary fw-bold">9am to 1pm</div>
+                    <div><strong>31 March 2027</strong></div>
+                    <div class="text-end text-info fw-bold">1pm to 5pm</div>
+                  </div>
+                  <div class="mt-4 p-3 bg-white border rounded-3 small shadow-sm">
+                    <i class="bi bi-info-circle-fill text-primary me-2"></i>
+                    <span class="text-muted">Staff are reminded to confirm attendance with line managers to ensure
+                      clinical cover.</span>
+                  </div>
+                </div>
+                <div class="modal-footer border-0 pt-0 pb-4 justify-content-center">
+                  <button type="button" class="btn btn-secondary rounded-pill px-4"
+                    data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary rounded-pill px-4 shadow-sm" onclick="window.print()">
+                    <i class="bi bi-printer me-2"></i>Print Schedule
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-5">
+
+          <h2 class="h3 fw-bold text-dark mb-4">Quick Access</h2>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <a href="#" onclick="showPage('Educator')"
+                class="card tile-card border-0 bg-primary text-white shadow-sm">
+                <div class="card-body text-center p-3">
+                  <i class="bi bi-person-badge fs-1 mb-2"></i>
+                  <h5>Educator</h5>
+                  <p class="small mb-0 opacity-75">Manager support & session setup.</p>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="#" onclick="showPage('Learner')" class="card tile-card border-0 bg-success text-white shadow-sm">
+                <div class="card-body text-center p-3">
+                  <i class="bi bi-mortarboard fs-1 mb-2"></i>
+                  <h5>Learner</h5>
+                  <p class="small mb-0 opacity-75">How it works & course logging.</p>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="#" onclick="showPage('feedback')" class="card tile-card border-0 text-white shadow-sm"
+                style="background-color: #006666;">
+                <div class="card-body text-center p-3">
+                  <i class="bi bi-chat-left-heart fs-1 mb-2"></i>
+                  <h5>Feedback</h5>
+                  <p class="small mb-0 opacity-75">Share your thoughts on training courses.</p>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-md-4">
+              <a href="#" onclick="showPage('Course_Catalogue1')"
+                class="card tile-card border-0 bg-info text-white shadow-sm">
+                <div class="card-body text-center p-3">
+                  <i class="bi bi-book fs-1 mb-2"></i>
+                  <h5>Catalogue</h5>
+                  <p class="small mb-0 opacity-75">Browse all live sessions.</p>
+                </div>
+              </a>
+            </div>
+            <!--<div class="col-md-4">
+              <a href="#" onclick="showPage('External_Learning')" class="card tile-card border-0 text-white shadow-sm"
+                style="background-color: #2b5797;">
+                <div class="card-body text-center p-3">
+                  <i class="bi bi-globe fs-1 mb-2"></i>
+                  <h5>Additional Learning</h5>
+                  <p class="small mb-0 opacity-75">Access Open University & external platforms.</p>
+                </div>
+              </a>
+            </div>-->
+            <div class="col-md-4">
+              <a href="#" onclick="showPage('Learner_VV')" class="card tile-card border-0 text-white shadow-sm"
+                style="background-color: #c68a12;">
+                <div class="card-body text-center p-3">
+                  <i class="bi bi-play-circle fs-1 mb-2"></i>
+                  <h5>Video Vault</h5>
+                  <p class="small mb-0 opacity-75">Watch recorded sessions.</p>
+                </div>
+              </a>
+            </div>
+            <!--<div class="col-md-4">
+              <a href="#" onclick="showPage('Informal_Learning')" class="card tile-card border-0 text-white shadow-sm"
+                style="background-color: #20c997;">
+                <div class="card-body text-center p-3">
+                  <i class="bi bi-lightbulb fs-1 mb-2"></i>
+                  <h5>Informal Learning</h5>
+                  <p class="small mb-0 opacity-75">Shadowing, coaching & peer learning.</p>
+                </div>
+              </a>
+            </div>-->
+            <div class="col-md-4">
+              <a href="#" onclick="showPage('MAST_Training')" class="card tile-card border-0 text-white shadow-sm"
+                style="background-color: #d35400;">
+                <div class="card-body text-center p-3">
+                  <i class="bi bi-shield-check fs-1 mb-2"></i>
+                  <h5>MAST</h5>
+                  <p class="small mb-0 opacity-75">Mandatory and Statutory Training.</p>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="#" onclick="showPage('QI_Page')" class="card tile-card border-0 text-white shadow-sm"
+                style="background-color: #6f42c1;">
+                <div class="card-body text-center p-3">
+                  <i class="bi bi-diagram-3 fs-1 mb-2"></i>
+                  <h5>Quality Improvement</h5>
+                  <p class="small mb-0 opacity-75">Tools, methodologies & project support.</p>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="#" onclick="showPage('Training_Rooms')"
+                class="card tile-card border-0 bg-danger text-white shadow-sm">
+                <div class="card-body text-center p-3">
+                  <i class="bi bi-geo-alt fs-1 mb-2"></i>
+                  <h5>Rooms</h5>
+                  <p class="small mb-0 opacity-75">Find trust & community venues.</p>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="#" onclick="showPage('FAQs')" class="card tile-card border-0 bg-secondary text-white shadow-sm">
+                <div class="card-body text-center p-3">
+                  <i class="bi bi-question-circle fs-1 mb-2"></i>
+                  <h5>Help & FAQ</h5>
+                  <p class="small mb-0 opacity-75">FAQs & training requests.</p>
+                </div>
+              </a>
+            </div>
+            <!--
+            <div class="col-md-4">
+              <a href="Volunteers.html" class="card tile-card border-0 text-white shadow-sm"
+                style="background-color: #6f42c1;">
+                <div class="card-body text-center p-3">
+                  <i class="bi bi-people fs-1 mb-2"></i>
+                  <h5>Volunteers</h5>
+                  <p class="small mb-0 opacity-75">Training and resources for volunteers.</p>
+                </div>
+              </a>
+            </div>
+          -->
+            <div class="p-4 bg-light rounded-4 shadow-sm mb-5">
+
+
+              <h4 class="fw-bold mb-3">How can you use your learning half day?</h4>
+              <p>Learning isn't just online courses; you can build your skills in lots of ways. Learning Half Days give
+                you time to learn, think, and get better at your job.</p>
+
+              <p>You can use it to:</p>
+              <ul>
+                <li>Work together with your team</li>
+                <li>Learn new ways to help patients, colleagues, and families, including your own</li>
+                <li>Work on getting better and learning more for yourself</li>
+                <li>Try something new or share what you know</li>
+                <li>Do your important mandatory and statutory training</li>
+              </ul>
+
+              <p>In this Learning Hub, you'll find lots of useful resources, classes, and chances to meet others who
+                also
+                want to learn. Everything is designed to help you share ideas and do well. Jump in, explore, and let's
+                learn together!</p>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="sticky-top" style="top: 20px; z-index: 10;">
+            <div class="card shadow-sm rounded-4 overflow-hidden mb-4 border border-3 border-primary">
+              <div class="card-header bg-white py-3 border-0">
+                <h5 class="fw-bold mb-0 text-primary">
+                  <i class="bi bi-megaphone-fill me-2"></i>Upcoming Learning Half Day Courses
+                </h5>
+              </div>
+              <div class="card-body p-0">
+                <div id="upcomingList" class="p-2"></div>
+              </div>
+              <div class="card-footer bg-light text-center border-0 py-3">
+                <a href="#" onclick="showPage('Course_Catalogue')" class="text-decoration-none fw-bold">
+                  View Full Calendar →
+                </a>
+              </div>
+            </div>
+
+            <div class="card border-0 bg-white text-dark shadow-sm rounded-4 p-4 text-center">
+              <i class="bi bi-info-circle fs-2 mb-2 text-primary"></i>
+              <h6 class="fw-bold">Need Help?</h6>
+              <p class="small text-muted">Check out our FAQ section.</p>
+              <a href="#" onclick="showPage('FAQs')" class="btn btn-sm btn-primary rounded-pill px-3">
+                <i class="bi bi-info-circle"></i> Frequently Asked Questions
+              </a>
+              <i class="bi bi-chat-heart fs-2 mb-2 text-success"></i>
+              <h6 class="fw-bold">Your Feedback</h6>
+              <p class="small text-muted">We value your thoughts. Let us know how we can improve.</p>
+              <a href="#" onclick="showPage('feedback')" class="btn btn-sm btn-primary rounded-pill px-3">
+                <i class="bi bi-chat-heart"></i>Feedback
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ======================================================
+= Course Calendar SECTION =
+========================================================= -->
+
+  <div id="Course_Catalogue" class="page">
+    <div class="container py-4">
+
+      <div class="row mb-4">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light p-3 rounded-pill shadow-sm">
+              <li class="breadcrumb-item"><a href="#" onclick="showPage('home');" class="text-decoration-none"><i
+                    class="bi bi-house-door"></i> Hub</a></li>
+              <li class="breadcrumb-item active fw-bold text-primary" aria-current="page">Course Calendar</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row align-items-start mb-5">
+        <div class="col-md-10">
+          <h1 class="display-5 fw-bold text-dark">Course Calendar</h1>
+          <p class="lead text-muted">Browse upcoming face-to-face and virtual sessions. Use the filter to find specific
+            topics or trust venues.</p>
+          <h5 class="fw-bold">Course Prospectus</h5>
+          <p class="small text-muted mb-3">View the full A–Z directory with course descriptions and audiences.</p>
+          <button onclick="showPage('Course_Catalogue1')" class="btn btn-info rounded-pill px-4 shadow-sm fw-bold"
+            style="color: white;">
+            <i class="bi bi-book me-2"></i>Open Prospectus
+          </button>
+        </div>
+
+        <div class="col-md-2 text-end d-none d-md-block mt-2">
+          <div class="p-3 bg-info bg-opacity-10 rounded-4 border-start border-info border-4 d-inline-block">
+            <i class="bi bi-book display-6 text-info"></i>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="input-group shadow-sm rounded-pill overflow-hidden border">
+            <span class="input-group-text bg-white border-0"><i class="bi bi-search text-info"></i></span>
+            <input type="text" id="calendarSearch" class="form-control border-0" placeholder="Filter the schedule..."
+              onkeyup="filterCalendar()">
+          </div>
+        </div>
+      </div>
+
+      <!--
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="text-uppercase fw-bold text-muted small mb-0">Starting in the next 4 weeks</h6>
+            <div class="btn-group">
+              <button class="btn btn-sm btn-light border shadow-sm" onclick="scrollUpcoming(-300)"><i
+                  class="bi bi-chevron-left"></i></button>
+              <button class="btn btn-sm btn-light border shadow-sm" onclick="scrollUpcoming(300)"><i
+                  class="bi bi-chevron-right"></i></button>
+            </div>
+          </div>
+          <div id="upcomingListCatalogue" class="d-flex flex-row flex-nowrap overflow-auto pb-2 gap-3"
+            style="scroll-behavior: smooth;">
+          </div>
+        </div>
+      </div>
+    -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+            <div class="card-body p-4">
+              <div id="calendar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ======================================================
+  = Learners Catalogue (browse) SECTION =
+  ========================================================= -->
+  <div id="Course_Catalogue1" class="page">
+    <div class="container py-4">
+
+      <div class="row mb-4">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light p-3 rounded-pill shadow-sm">
+              <li class="breadcrumb-item"><a href="#" onclick="showPage('home');" class="text-decoration-none"><i
+                    class="bi bi-house-door"></i> Hub</a></li>
+              <li class="breadcrumb-item active fw-bold text-info" aria-current="page">Course Prospectus</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row align-items-start mb-5">
+        <div class="col-md-10">
+          <h1 class="display-5 fw-bold text-dark">Course Prospectus</h1>
+          <p class="lead text-muted">A comprehensive A–Z directory of all learning opportunities. Find the right course
+            for your professional development.</p>
+
+          <div class="row g-4 mb-5">
+            <div class="col-md-4">
+              <div class="card h-100 p-4 border-0 shadow-sm rounded-4">
+                <h5 class="fw-bold text-dark">
+                  <i class="bi bi-calendar3 text-info me-2"></i>Course Calendar
+                </h5>
+                <p class="small text-muted mb-3">
+                  Looking for training on a specific date? Go to the <strong>Course Calendar</strong> to find training
+                  listed
+                  by dates, times, and available venues.
+                </p>
+                <button onclick="showPage('Course_Catalogue')"
+                  class="btn btn-info text-white rounded-pill px-4 shadow-sm fw-bold mt-auto">
+                  <i class="bi bi-arrow-right-circle me-2"></i>Go to Course Calendar
+                </button>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100 p-4 border-0 shadow-sm rounded-4">
+                <h5 class="fw-bold text-dark">
+                  <i class="bi bi-play-circle me-2" style="color: #c68a12;"></i>Video Vault
+                </h5>
+                <p class="small text-muted mb-3">
+                  Recorded sessions allow you to catch up on training you may have missed.
+                </p>
+                <button onclick="showPage('Learner_VV')"
+                  class="btn btn-warning text-white rounded-pill px-4 shadow-sm fw-bold mt-auto">
+                  <i class="bi bi-play-fill me-2"></i>Go to Video Vault
+                </button>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100 p-4 border-0 shadow-sm rounded-4">
+                <h5 class="fw-bold text-dark">
+                  <i class="bi bi-diagram-3 me-2" style="color: #6f42c1;"></i>Quality Improvement
+                </h5>
+                <p class="small text-muted mb-3">
+                  Quality improvement sessions build your skills and confidence so you can make a real difference.
+                </p>
+                <button onclick="showPage('QI_Page')" class="btn text-white rounded-pill px-4 shadow-sm fw-bold mt-auto"
+                  style="background-color: #6f42c1;">
+                  <i class="bi bi-arrow-up-right-circle-fill me-2"></i>Go to QI Resources
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-2 text-end d-none d-md-block mt-2">
+          <div class="p-3 bg-info bg-opacity-10 rounded-4 border-start border-info border-4 d-inline-block">
+            <i class="bi bi-book display-6 text-info"></i>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-body text-white p-3" style="background-color: #5ba2b8;">
+              <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+
+                <div class="d-flex flex-wrap align-items-center gap-1">
+                  <span class="small text-uppercase fw-bold opacity-75 me-2">Quick Jump:</span>
+                  <div class="alphabet-nav d-flex flex-wrap gap-1">
+                    ${"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(l =>
+                    `<button class="btn btn-sm text-white fw-bold border-0 p-1"
+                      onclick="filterByLetter('${l}')">${l}</button>`
+                    ).join("")}
+                    <button class="btn btn-sm btn-info rounded-pill fw-bold text-dark px-3 ms-2"
+                      onclick="filterByLetter('ALL')">ALL</button>
+                  </div>
+                </div>
+
+                <div class="search-container" style="min-width: 280px;">
+                  <div class="input-group input-group-sm shadow-sm rounded-pill overflow-hidden">
+                    <span class="input-group-text bg-white border-0 pe-0">
+                      <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input type="text" id="prospectusSearchInput" class="form-control" placeholder="Search courses..."
+                      onkeyup="filterProspectus(this.value)">
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div id="courseList" class="row g-4">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================
+  = Educator SECTION =
+  ========================================================= -->
+
+
+
+  <div id="Educator" class="page">
+    <div class="container py-4">
+
+      <div class="row mb-4">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light p-3 rounded-pill shadow-sm">
+              <li class="breadcrumb-item"><a href="#" onclick="showPage('home');" class="text-decoration-none"><i
+                    class="bi bi-house-door"></i> Hub</a></li>
+              <li class="breadcrumb-item active fw-bold text-primary" aria-current="page">Educator Toolkit</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row align-items-start mb-5">
+        <div class="col-md-10">
+          <h1 class="display-5 fw-bold text-dark">Educator Toolkit</h1>
+          <p class="lead text-muted">
+            Resources and support for Trainers, Educators, and Line Managers to facilitate
+            learning half days at RDaSH.
+          </p>
+        </div>
+
+        <div class="col-md-2 text-end d-none d-md-block mt-2">
+          <div class="p-3 bg-primary bg-opacity-10 rounded-4 border-start border-primary border-4 d-inline-block">
+            <i class="bi bi-person-badge display-6 text-primary"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mb-5">
+        <div class="col-lg-12">
+
+
+          <div class="row justify-content-center">
+            <div class="col-lg-10">
+
+              <div class="p-4 bg-light border-bottom">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-file-earmark-pdf fs-2 me-3 text-danger"></i>
+                  <div>
+                    <h6 class="fw-bold mb-0">Request to run a LHD training session</h6>
+                    <p class="small text-muted mb-0">Please complete the form below to request new sessions.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="ratio ratio-16x9" style="min-height: 650px;">
+                <iframe
+                  src="pdfjs/web/viewer.html?file=../../Assets/Create%20a%20booking%20example%20and%20form.pdf#disablehistory=true"
+                  frameborder="0" width="100%" height="100%">
+                </iframe>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+    <!--
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <h4 class="fw-bold mb-3">Core Actions</h4>
+
+          <div class="card border-0 shadow-sm rounded-4 mb-3 educator-action-card">
+            <div class="card-body d-flex align-items-start p-4">
+              <div class="icon-box bg-primary text-white me-3">
+                <i class="bi bi-calendar-plus fs-3"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-1">Set Up a Session</h5>
+                <p class="small text-muted mb-3">Ready to teach? Submit your session details to be included in the Hub
+                  and Calendar.</p>
+                <a href="#" class="btn btn-primary btn-sm rounded-pill px-4">Request Setup</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card border-0 shadow-sm rounded-4 mb-3 educator-action-card">
+            <div class="card-body d-flex align-items-start p-4">
+              <div class="icon-box bg-primary text-white me-3">
+                <i class="bi bi-door-open fs-3"></i>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-1">Book a Venue</h5>
+                <p class="small text-muted mb-3">Find and book the perfect space for your clinical or classroom-based
+                  training.</p>
+                <button onclick="showPage('Training_Rooms')" class="btn btn-primary btn-sm rounded-pill px-4">View
+                  Rooms</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="bg-white p-4 rounded-4 shadow-sm h-100 border-top border-primary border-4">
+            <h4 class="fw-bold mb-4">Manager Resources</h4>
+
+            <ul class="list-unstyled">
+              <li class="mb-4 d-flex">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                <div>
+                  <h6 class="fw-bold mb-1">Protected Learning Time Policy</h6>
+                  <p class="small text-muted">Guidance on ensuring your team gets their monthly Learning Half Day.</p>
+                </div>
+              </li>
+              <li class="mb-4 d-flex">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                <div>
+                  <h6 class="fw-bold mb-1">Study Leave Requests</h6>
+                  <p class="small text-muted">Access the forms and approval criteria for external professional
+                    development.</p>
+                </div>
+              </li>
+              <li class="mb-0 d-flex">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                <div>
+                  <h6 class="fw-bold mb-1">Reporting & Compliance</h6>
+                  <p class="small text-muted">How to track your team's statutory and mandatory training on ESR.</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="mt-4 p-3 bg-light rounded-3">
+              <p class="small mb-0 fst-italic text-muted">
+                "Educators aren't just those with a title; they are anyone sharing knowledge to improve patient care."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    -->
+    <div class="row mt-5">
+      <div class="col-12">
+        <div class="p-3 bg-light rounded-3 text-center">
+          <p class="small mb-0 fst-italic text-muted">
+            "Educators aren't just those with a title; they are anyone sharing knowledge to improve patient care."
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <!-- ======================================================
+  = Learner SECTION =
+  ========================================================= -->
+  <div id="Learner" class="page">
+    <div class="container py-4">
+
+      <div class="row mb-4">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light p-3 rounded-pill shadow-sm">
+              <li class="breadcrumb-item"><a href="#" onclick="showPage('home');" class="text-decoration-none"><i
+                    class="bi bi-house-door"></i> Hub</a></li>
+              <li class="breadcrumb-item active fw-bold text-success" aria-current="page">Learner Guide</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+
+
+      <div class="row align-items-start mb-5 text-center text-md-start">
+        <div class="col-md-10">
+          <h1 class="display-5 fw-bold text-dark">Self Service Training Portal</h1>
+          <p class="lead text-muted">
+            Your Gateway to Training: Self-enroll for your own development or manage your
+            team's training from one central dashboard. <strong>Please note: this guide is for non-MAST
+              courses.</strong>
+          </p>
+        </div>
+
+        <div class="col-md-2 text-end d-none d-md-block mt-2">
+          <div class="p-3 bg-success bg-opacity-10 rounded-4 border-start border-success border-4 d-inline-block">
+            <i class="bi bi-mortarboard display-6 text-success"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-5">
+            <div class="card-header bg-white border-0 p-0">
+
+              <ul class="nav nav-pills nav-fill bg-light p-2" id="trainingTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active py-3 fw-bold rounded-pill" id="staff-tab" data-bs-toggle="tab"
+                    data-bs-target="#staff" type="button" role="tab">
+                    <i class="bi bi-person-badge me-2"></i>Employee: Self-Enrolment
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link py-3 fw-bold rounded-pill" id="manager-tab" data-bs-toggle="tab"
+                    data-bs-target="#manager" type="button" role="tab">
+                    <i class="bi bi-person-gear me-2"></i>Manager & Admin: Enrolling on Behalf of Staff
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link py-3 fw-bold rounded-pill text-success" id="external-learning-tab"
+                    data-bs-toggle="tab" data-bs-target="#external-learning" type="button" role="tab">
+                    <i class="bi bi-journal-check me-2"></i>Record External Learning
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <div class="card-body p-4 p-md-5 bg-white">
+              <div class="tab-content" id="trainingTabContent">
+
+                <div class="tab-pane fade show active" id="staff" role="tabpanel">
+                  <h2 class="h3 mb-5 text-success fw-bold border-bottom pb-3">Employee Self-Enrolment Guide</h2>
+
+                  <div class="guide-step mb-5">
+                    <div class="d-flex align-items-center mb-3">
+                      <span class="badge rounded-circle bg-success p-3 me-3 text-white">01</span>
+                      <h4 class="fw-bold mb-0">Access My Learning</h4>
+                    </div>
+                    <p class="text-muted ms-md-5">On your ESR dashboard, click the <strong>My Learning</strong> link
+                      in
+                      the sidebar to open your learner homepage.</p>
+                    <div class="ms-md-5 mt-3">
+                      <img src="Assets/g1.png" class="img-fluid border rounded-4 shadow-sm w-100"
+                        style="max-width: 850px;" alt="ESR dashboard">
+                    </div>
+                  </div>
+
+                  <div class="guide-step mb-5">
+                    <div class="d-flex align-items-center mb-3">
+                      <span class="badge rounded-circle bg-success p-3 me-3 text-white">02</span>
+                      <h4 class="fw-bold mb-0">Search for Training</h4>
+                    </div>
+                    <p class="text-muted ms-md-5">Use the search bar on your learner page. Type in a keyword from
+                      the
+                      course name and click the <strong>magnifying glass</strong> icon.</p>
+                    <div class="ms-md-5 mt-3">
+                      <img src="Assets/g2.png" class="img-fluid border rounded-4 shadow-sm w-100"
+                        style="max-width: 850px;" alt="Search bar">
+                    </div>
+                  </div>
+
+                  <div class="guide-step mb-5">
+                    <div class="d-flex align-items-center mb-3">
+                      <span class="badge rounded-circle bg-success p-3 me-3 text-white">03</span>
+                      <h4 class="fw-bold mb-0">Select and Enrol</h4>
+                    </div>
+                    <p class="text-muted ms-md-5">Select your course to see available classes. Click the
+                      <strong>Enrol
+                        Cog</strong> for the specific class you want. Review the details, add any special
+                      instructions,
+                      and click <strong>Submit</strong>.
+                    </p>
+                    <div class="ms-md-5 mt-3">
+                      <div class="row g-3">
+                        <div class="col-md-6"><img src="Assets/g3.png" class="img-fluid border rounded-4 shadow-sm"
+                            alt="Select cog"></div>
+                        <div class="col-md-6"><img src="Assets/g4.png" class="img-fluid border rounded-4 shadow-sm"
+                            alt="Submit enrollment"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="guide-step mb-5">
+                    <div class="d-flex align-items-center mb-3">
+                      <span class="badge rounded-circle bg-success p-3 me-3 text-white">04</span>
+                      <h4 class="fw-bold mb-0">Check Enrollment</h4>
+                    </div>
+                    <p class="text-muted ms-md-5">The course will now appear in your <strong>Instructor-Led
+                        Enrolments</strong> section on your learning home page.</p>
+                    <div class="ms-md-5 mt-3">
+                      <img src="Assets/g5.png" class="img-fluid border rounded-4 shadow-sm w-100"
+                        style="max-width: 850px;" alt="Final View">
+                    </div>
+                  </div>
+
+                  <div class="bg-light p-4 rounded-4 border-start border-success border-5 shadow-sm">
+                    <h4 class="text-success fw-bold"><i class="bi bi-x-circle-fill me-2"></i>How to Cancel</h4>
+                    <p class="ms-md-4 text-muted mt-2">Click the <strong>Class Name</strong> on your learning page.
+                      Use
+                      the drop-down to select <strong>Unenrol</strong>, click <strong>Go</strong>, select your
+                      reason,
+                      and click <strong>Finish</strong>.</p>
+                    <div class="ms-md-4 mt-3 d-flex gap-2 flex-wrap">
+                      <img src="Assets/g6.png" class="img-fluid border rounded shadow-sm" style="max-height: 80px;">
+                      <img src="Assets/g7.png" class="img-fluid border rounded shadow-sm" style="max-height: 80px;">
+                      <img src="Assets/g8.png" class="img-fluid border rounded shadow-sm" style="max-height: 80px;">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade" id="manager" role="tabpanel">
+                  <h2 class="h3 mb-5 text-success fw-bold border-bottom pb-3">Manager & Admin Enrolment Guide</h2>
+
+                  <div class="guide-step mb-5">
+                    <div class="d-flex align-items-center mb-3">
+                      <span class="badge rounded-circle bg-success p-3 me-3 text-white">01</span>
+                      <h4 class="fw-bold mb-0">Access Team Learning</h4>
+                    </div>
+                    <p class="text-muted ms-md-5">Click the <strong>Manager</strong> tab, select <strong>My Team
+                        Career
+                        Information</strong>, and then click <strong>Learning</strong>.</p>
+                    <div class="ms-md-5 mt-3">
+                      <img src="Assets/g9.png" class="img-fluid border rounded-4 shadow-sm w-100"
+                        style="max-width: 850px;" alt="Manager Tab Navigation">
+                    </div>
+                  </div>
+
+                  <div class="guide-step mb-5">
+                    <div class="d-flex align-items-center mb-3">
+                      <span class="badge rounded-circle bg-success p-3 me-3 text-white">02</span>
+                      <h4 class="fw-bold mb-0">Identify Staff Member</h4>
+                    </div>
+                    <p class="text-muted ms-md-5">Search for the staff member by name or select them from the list.
+                      Click the <strong>Action</strong> button (circled in yellow) to proceed to their learner page.
+                    </p>
+                    <div class="ms-md-5 mt-3">
+                      <img src="Assets/g10.png" class="img-fluid border rounded-4 shadow-sm w-100"
+                        style="max-width: 850px;" alt="Action button selection">
+                    </div>
+                  </div>
+
+                  <div class="guide-step mb-5">
+                    <div class="d-flex align-items-center mb-3">
+                      <span class="badge rounded-circle bg-success p-3 me-3 text-white">03</span>
+                      <h4 class="fw-bold mb-0">Search & Enrol</h4>
+                    </div>
+                    <p class="text-muted ms-md-5">Type the course keyword into the <strong>Search Course</strong>
+                      bar.
+                      Select the correct class by clicking the <strong>Enrol Cog</strong>.</p>
+                    <div class="ms-md-5 mt-3">
+                      <div class="row g-3">
+                        <div class="col-md-6"><img src="Assets/g11.png" class="img-fluid border rounded-4 shadow-sm"
+                            alt="Manager Search"></div>
+                        <div class="col-md-6"><img src="Assets/g12.png" class="img-fluid border rounded-4 shadow-sm"
+                            alt="Manager Cog"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="guide-step mb-5">
+                    <div class="d-flex align-items-center mb-3">
+                      <span class="badge rounded-circle bg-success p-3 me-3 text-white">04</span>
+                      <h4 class="fw-bold mb-0">Confirmation</h4>
+                    </div>
+                    <p class="text-muted ms-md-5">Add any special instructions and click <strong>Submit</strong>.
+                      The
+                      course will now show in the staff member's <strong>Instructor-Led Enrolments</strong> section.
+                    </p>
+                    <div class="ms-md-5 mt-3">
+                      <div class="row g-3">
+                        <div class="col-md-6"><img src="Assets/g13.png" class="img-fluid border rounded-4 shadow-sm"
+                            alt="Manager Submit"></div>
+                        <div class="col-md-6"><img src="Assets/g14.png" class="img-fluid border rounded-4 shadow-sm"
+                            alt="Manager Final View"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bg-light p-4 rounded-4 border-start border-success border-5 shadow-sm">
+                    <h4 class="text-dark fw-bold"><i class="bi bi-x-circle-fill me-2 text-success"></i>How to Cancel
+                    </h4>
+                    <p class="ms-md-4 text-muted mt-2">Click the <strong>Class Name</strong>, select
+                      <strong>Unenrol</strong> from the drop-down, and click <strong>Go</strong>. Choose a reason
+                      and
+                      click <strong>Finish</strong>.
+                    </p>
+                    <div class="ms-md-4 mt-3 d-flex gap-2 flex-wrap">
+                      <img src="Assets/g15.png" class="img-fluid border rounded shadow-sm" style="max-height: 80px;">
+                      <img src="Assets/g16.png" class="img-fluid border rounded shadow-sm" style="max-height: 80px;">
+                      <img src="Assets/g17.png" class="img-fluid border rounded shadow-sm" style="max-height: 80px;">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade" id="external-learning" role="tabpanel">
+                  <h2 class="h3 mb-5 text-success fw-bold border-bottom pb-3">How to record external learning class for
+                    learning half days</h2>
+
+                  <div class="guide-step mb-5">
+                    <div class="d-flex align-items-center mb-3">
+                      <span class="badge rounded-circle bg-success p-3 me-3 text-white">01</span>
+                      <h4 class="fw-bold mb-0">Navigate to External Classes</h4>
+                    </div>
+                    <p class="text-muted ms-md-5">Click on <strong>My Learning</strong> in the sidebar, then click on
+                      <strong>manage my external classes</strong> at the bottom of the page.</p>
+                    <div class="ms-md-5 mt-3">
+                      <img src="Assets/ext_g1.png" class="img-fluid border rounded-4 shadow-sm"
+                        style="max-width: 500px;" alt="Navigate to external classes">
+                    </div>
+                  </div>
+
+                  <div class="guide-step mb-5">
+                    <div class="d-flex align-items-center mb-3">
+                      <span class="badge rounded-circle bg-success p-3 me-3 text-white">02</span>
+                      <h4 class="fw-bold mb-0">Add a New Record</h4>
+                    </div>
+                    <p class="text-muted ms-md-5">Click on the <strong>Add</strong> button to begin entering a new
+                      external class.</p>
+                    <div class="ms-md-5 mt-3">
+                      <img src="Assets/ext_g2.png" class="img-fluid border rounded-4 shadow-sm"
+                        style="max-width: 500px;" alt="Click Add">
+                    </div>
+                  </div>
+
+                  <div class="guide-step mb-5">
+                    <div class="d-flex align-items-center mb-3">
+                      <span class="badge rounded-circle bg-success p-3 me-3 text-white">03</span>
+                      <h4 class="fw-bold mb-0">Enter Course Details</h4>
+                    </div>
+                    <ul class="text-muted ms-md-5">
+                      <li>Always prefix the title with <strong>LHD –</strong> and free type the name of the course.</li>
+                      <li>Select the date of the Learning Half Day on which you completed the course.</li>
+                      <li>Free type the name of the supplier of the course.</li>
+                      <li>Click <strong>Continue</strong>.</li>
+                    </ul>
+                    <div class="ms-md-5 mt-3">
+                      <img src="Assets/ext_g3.png" class="img-fluid border rounded-4 shadow-sm"
+                        style="max-width: 500px;" alt="Enter details">
+                    </div>
+                  </div>
+
+                  <div class="guide-step mb-5">
+                    <div class="d-flex align-items-center mb-3">
+                      <span class="badge rounded-circle bg-success p-3 me-3 text-white">04</span>
+                      <h4 class="fw-bold mb-0">Review and Submit</h4>
+                    </div>
+                    <ul class="text-muted ms-md-5">
+                      <li>The next page will confirm the details you have entered.</li>
+                      <li>It will show who it will go to for approval to be added to ESR.</li>
+                      <li>You will have the opportunity to add any comments for the approver.</li>
+                      <li>Click on <strong>Submit</strong> to proceed (or Back to make changes).</li>
+                    </ul>
+                    <div class="ms-md-5 mt-3">
+                      <img src="Assets/ext_g4.png" class="img-fluid border rounded-4 shadow-sm"
+                        style="max-width: 500px;" alt="Submit course">
+                    </div>
+                  </div>
+
+                  <div class="guide-step mb-5">
+                    <div class="d-flex align-items-center mb-3">
+                      <span class="badge rounded-circle bg-success p-3 me-3 text-white">05</span>
+                      <h4 class="fw-bold mb-0">Confirmation</h4>
+                    </div>
+                    <p class="text-muted ms-md-5">You will receive a confirmation of submission. Click on
+                      <strong>Home</strong> to return to ESR.</p>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+= Video Vault SECTION =
+========================================================= -->
+
+  <div id="Learner_VV" class="page">
+    <div class="container py-4">
+
+      <div class="row mb-4">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light p-3 rounded-pill shadow-sm">
+              <li class="breadcrumb-item"><a href="#" onclick="showPage('home');" class="text-decoration-none"><i
+                    class="bi bi-house-door"></i> Hub</a></li>
+              <li class="breadcrumb-item active fw-bold" style="color: #c68a12;" aria-current="page">Video Vault
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row align-items-start mb-5">
+        <div class="col-md-10">
+          <h1 class="display-5 fw-bold text-dark">Video Vault</h1>
+          <p class="lead text-muted">A comprehensive A–Z directory of recorded training. Watch and learn at your own
+            pace.</p>
+
+          <h5 class="fw-bold text-dark">
+            <i class="bi bi-camera-video-fill me-2" style="color: #c68a12;"></i>On-Demand Learning
+          </h5>
+          <p class="small text-muted mb-3">
+            Recorded sessions allow you to catch up on training you may have missed during the live Learning Half
+            Days.
+          </p>
+        </div>
+
+        <div class="col-md-2 text-end d-none d-md-block mt-2">
+          <div class="p-3 bg-light rounded-4 border-start border-4 shadow-sm d-inline-block"
+            style="border-color: #c68a12 !important;">
+            <i class="bi bi-play-circle display-6" style="color: #c68a12 !important;"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mt-1 mb-5">
+        <div class="col-md-4">
+          <div class="card h-100 p-4 border-0 shadow-sm rounded-4">
+            <h5 class="fw-bold text-dark">
+              <i class="bi bi-journal-bookmark me-2 text-primary"></i>Course Prospectus
+            </h5>
+            <p class="small text-muted mb-3">
+              Browse our full list of available courses and discover learning opportunities for your development.
+            </p>
+            <button onclick="showPage('Course_Catalogue1')" class="btn btn-primary text-white rounded-pill px-4 shadow-sm fw-bold mt-auto">
+              <i class="bi bi-book me-2"></i>Go to Prospectus
+            </button>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 p-4 border-0 shadow-sm rounded-4">
+            <h5 class="fw-bold text-dark">
+              <i class="bi bi-calendar-event me-2 text-info"></i>Course Calendar
+            </h5>
+            <p class="small text-muted mb-3">
+              Looking for training on a specific date? Find training listed by dates, times, and available venues.
+            </p>
+            <button onclick="showPage('Course_Catalogue')" class="btn btn-info text-white rounded-pill px-4 shadow-sm fw-bold mt-auto">
+              <i class="bi bi-arrow-right-circle me-2"></i>Go to Course Calendar
+            </button>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 p-4 border-0 shadow-sm rounded-4">
+            <h5 class="fw-bold text-dark">
+              <i class="bi bi-diagram-3 me-2" style="color: #6f42c1;"></i>Quality Improvement
+            </h5>
+            <p class="small text-muted mb-3">
+              Quality improvement sessions build your skills and confidence so you can make a real difference.
+            </p>
+            <button onclick="showPage('QI_Page')" class="btn text-white rounded-pill px-4 shadow-sm fw-bold mt-auto" style="background-color: #6f42c1;">
+              <i class="bi bi-arrow-up-right-circle-fill me-2"></i>Go to QI Resources
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-body text-white p-3" style="background-color: #c68a12;">
+              <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+                <div class="d-flex flex-wrap align-items-center gap-1">
+                  <span class="small text-uppercase fw-bold opacity-75 me-2">Quick Jump:</span>
+                  <div id="vvAlphabetNav" class="alphabet-nav d-flex flex-wrap gap-1">
+                  </div>
+                </div>
+                <div class="search-container" style="min-width: 280px;">
+                  <div class="input-group input-group-sm shadow-sm rounded-pill overflow-hidden">
+                    <span class="input-group-text bg-white border-0 pe-0">
+                      <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input type="text" id="vvSearchInputNew" class="form-control border-0 py-2 ps-2"
+                      placeholder="Search video titles..." onkeyup="filterVideoVaultNew()">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div id="vvCourseList" class="row g-4">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ====================================================
+   = QI Section =
+   ======================================================-->
+
+  <div id="QI_Page" class="page">
+    <div class="container py-4">
+
+      <div class="row mb-4">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light p-3 rounded-pill shadow-sm">
+              <li class="breadcrumb-item">
+                <a href="#" onclick="showPage('home');" class="text-decoration-none">
+                  <i class="bi bi-house-door"></i> Hub
+                </a>
+              </li>
+              <li class="breadcrumb-item active fw-bold" style="color: #6f42c1;" aria-current="page">Quality Improvement
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row align-items-start mb-5">
+        <div class="col-md-10">
+          <h1 class="display-5 fw-bold text-dark">Quality Improvement (QI)</h1>
+
+
+
+
+
+          <p class="lead text-muted">Quality Improvement (QI) is about working together to make our services better for
+            everyone, one small step at a time.
+            Quality Improvement is not just a way of doing things it’s about making our work better, safer, and easier
+            so that the people who use our services have an improved experience</p>
+          <p class="lead text-muted">Not all learning happens in a classroom.</p>
+          <p class="lead text-muted">Learning half day’s are a short block of time where teams stop their normal work so
+            they can learn, think,
+            and plan small changes together.</p>
+          <h5 class="fw-bold text-dark">
+            <i class="bi bi-arrow-up-right-circle-fill me-2" style="color: #6f42c1;"></i>Continuous Growth
+          </h5>
+
+          <p class="small text-muted mb-3">
+            Use these resources to identify efficiencies, improve patient outcomes, and share your team's success
+            stories across the trust.
+          </p>
+
+
+
+
+        </div>
+
+        <div class="col-md-2 text-end d-none d-md-block mt-2">
+          <div class="p-3 bg-light rounded-4 border-start border-4 shadow-sm d-inline-block"
+            style="border-color: #6f42c1 !important;">
+            <i class="bi bi-diagram-3 display-6" style="color: #6f42c1 !important;"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mt-1 mb-5">
+        <div class="col-md-4">
+          <div class="card h-100 p-4 border-0 shadow-sm rounded-4">
+            <h5 class="fw-bold text-dark">
+              <i class="bi bi-journal-bookmark me-2 text-primary"></i>Course Prospectus
+            </h5>
+            <p class="small text-muted mb-3">
+              Browse our full list of available courses and discover learning opportunities for your development.
+            </p>
+            <button onclick="showPage('Course_Catalogue1')" class="btn btn-primary text-white rounded-pill px-4 shadow-sm fw-bold mt-auto">
+              <i class="bi bi-book me-2"></i>Go to Prospectus
+            </button>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 p-4 border-0 shadow-sm rounded-4">
+            <h5 class="fw-bold text-dark">
+              <i class="bi bi-calendar-event me-2 text-info"></i>Course Calendar
+            </h5>
+            <p class="small text-muted mb-3">
+              Looking for training on a specific date? Find training listed by dates, times, and available venues.
+            </p>
+            <button onclick="showPage('Course_Catalogue')" class="btn btn-info text-white rounded-pill px-4 shadow-sm fw-bold mt-auto">
+              <i class="bi bi-arrow-right-circle me-2"></i>Go to Course Calendar
+            </button>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 p-4 border-0 shadow-sm rounded-4">
+            <h5 class="fw-bold text-dark">
+              <i class="bi bi-play-circle me-2" style="color: #c68a12;"></i>Video Vault
+            </h5>
+            <p class="small text-muted mb-3">
+              Recorded sessions allow you to catch up on training you may have missed.
+            </p>
+            <button onclick="showPage('Learner_VV')" class="btn btn-warning text-white rounded-pill px-4 shadow-sm fw-bold mt-auto">
+              <i class="bi bi-play-fill me-2"></i>Go to Video Vault
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-5">
+        <div class="col-12">
+          <div class="card border-0 shadow-lg rounded-4 overflow-hidden"
+            style="border-left: 8px solid #6f42c1 !important;">
+            <div class="card-body p-4 p-md-5">
+              <div class="row align-items-center">
+
+                <div class="col-lg-8">
+                  <div class="d-flex align-items-center mb-3">
+                    <span class="badge rounded-pill px-3 py-2 me-2"
+                      style="background-color: rgba(111, 66, 193, 0.1); color: #6f42c1; border: 1px solid rgba(111, 66, 193, 0.3);">
+                      <i class="bi bi-trophy-fill me-1"></i> Trust-wide Contest
+                    </span>
+                    <span class="text-danger fw-bold small"><i class="bi bi-calendar-event me-1"></i> Closing:
+                      01.09.2026</span>
+                  </div>
+
+                  <h2 class="fw-bold text-dark mb-1">QI Posters: Competition Time!</h2>
+                  <p class="lead text-muted mb-3">Create your team’s QI poster for this year’s contest. Top prize worth
+                    <strong>£5,000</strong>.
+                  </p>
+
+                  <button class="btn btn-sm fw-bold p-0 mb-3" style="color: #6f42c1;" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#qiCompetitionDetails" aria-expanded="false">
+                    <i class="bi bi-plus-circle me-1"></i> View Full Competition Details & Requirements
+                  </button>
+
+                  <div class="collapse" id="qiCompetitionDetails">
+                    <div class="pt-3 border-top mt-2">
+                      <p>As part of this year’s trust‑wide Quality Improvement (QI) contest, each team is asked to
+                        create a QI poster showcasing an audit, research project, or improvement initiative that has
+                        taken place, or is currently underway, since 1 January 2025.</p>
+
+                      <p>During your learning half days, you are invited to spend dedicated time working together to
+                        start building your poster.</p>
+
+                      <h5 class="fw-bold mt-4">Step-by-Step Activity:</h5>
+                      <ul class="text-muted">
+                        <li>Meet as a group in Teams</li>
+                        <li>Choose the QI project, idea or improvement you want to showcase</li>
+                        <li>Gather key information and data</li>
+                        <li>Agree your main messages about the impact you’ve made</li>
+                        <li>Start creating your draft poster ready for submission</li>
+                      </ul>
+
+                      <h5 class="fw-bold mt-4">Why this is important:</h5>
+                      <ul class="text-muted">
+                        <li>Highlight great work happening in your team</li>
+                        <li>Celebrate improvements made for colleagues, patients or services</li>
+                        <li>Share learning across the trust and contribute to a trust‑wide event</li>
+                      </ul>
+
+                      <h5 class="fw-bold mt-4">What you need:</h5>
+                      <ul>
+                        <li>Your Learning Half Day time</li>
+                      </ul>
+
+                      <div class="alert alert-light border-start border-4 mt-4"
+                        style="border-color: #6f42c1 !important;">
+                        <small class="text-muted d-block mb-2">For further information check out February's Trust
+                          Matters or the links below:</small>
+                        <div class="d-flex flex-wrap gap-3">
+                          <a href="https://intranet.rdash.nhs.uk/news/the-quality-improvement-qi-poster-contest-is-back/"
+                            target="_blank" class="btn btn-purple text-white rounded-pill px-4 shadow-sm fw-bold"
+                            style="background-color: #6f42c1;">
+                            <i class="bi bi-info-circle me-2"></i>Full Details
+                          </a>
+                          <a href="https://intranet.rdash.nhs.uk/communications/corporate-resources-and-templates/#posters"
+                            target="_blank" class="btn btn-outline-purple rounded-pill px-4 fw-bold"
+                            style="color: #6f42c1; border-color: #6f42c1;">
+                            <i class="bi bi-file-earmark-ppt me-2"></i>Poster Template
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-4 d-none d-lg-block text-center">
+                  <div class="p-4 bg-light rounded-circle d-inline-block shadow-sm mb-3"
+                    style="border: 2px dashed #6f42c1;">
+                    <i class="bi bi-megaphone display-1 text-purple" style="color: #6f42c1;"></i>
+                  </div>
+                  <h4 class="fw-bold mt-2">£5,000 Prize</h4>
+                  <p class="small text-muted">Win recognition and funding for your team!</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-body text-white p-3" style="background-color: #6f42c1;">
+              <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+                <div class="d-flex flex-wrap align-items-center gap-1">
+                  <span class="small text-uppercase fw-bold opacity-75 me-2">Quick Jump:</span>
+                  <div id="qiAlphabetNav" class="alphabet-nav d-flex flex-wrap gap-1">
+                  </div>
+                </div>
+                <div class="search-container" style="min-width: 280px;">
+                  <div class="input-group input-group-sm shadow-sm rounded-pill overflow-hidden">
+                    <span class="input-group-text bg-white border-0 pe-0">
+                      <i class="bi bi-search text-muted"></i>
+                    </span>
+                    <input type="text" id="qiSearchInput" class="form-control border-0 py-2 ps-2"
+                      placeholder="Search QI tools or projects..." onkeyup="filterQI()">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div id="qiContentList" class="row g-4">
+            <div class="col-12 text-center py-5">
+              <i class="bi bi-tools display-1 text-muted opacity-25"></i>
+              <p class="text-muted mt-3">QI Tools and Project registers loading...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================
+  = Training Rooms SECTION =
+  ========================================================= -->
+  <div id="Training_Rooms" class="page">
+    <div class="container py-4">
+
+      <div class="row mb-4">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light p-3 rounded-pill shadow-sm">
+              <li class="breadcrumb-item"><a href="#" onclick="showPage('home');" class="text-decoration-none"><i
+                    class="bi bi-house-door"></i> Hub</a></li>
+              <li class="breadcrumb-item active fw-bold text-danger" aria-current="page">Training Rooms</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row align-items-start mb-5">
+        <div class="col-md-10">
+          <h1 class="display-5 fw-bold text-dark">Training Venues</h1>
+          <div class="mb-4">
+            <p class="lead text-dark">
+              Our Trust training room list brings together a range of spaces across
+              <strong>North Lincolnshire</strong>, <strong>Rotherham</strong>, and <strong>Doncaster</strong>,
+              making it easy for teams to find the right setting for their needs.
+            </p>
+
+            <div class="mb-5">
+              <p class="lead text-dark mb-4">
+                Our Trust training room list brings together a range of spaces across
+                <strong>North Lincolnshire</strong>, <strong>Rotherham</strong>, and <strong>Doncaster</strong>,
+                making it easy for teams to find the right setting for their needs.
+              </p>
+
+              <div
+                class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden border-start border-4 border-danger">
+                <div class="row g-0">
+
+                  <div class="col-md-7 p-4">
+                    <div class="d-flex">
+                      <div class="bg-light rounded-3 p-2 me-3 d-flex align-items-center justify-content-center"
+                        style="width: 45px; height: 45px;">
+                        <i class="bi bi-search text-dark fs-5"></i>
+                      </div>
+                      <div>
+                        <h6 class="fw-bold text-dark mb-1">Quick Search Tip</h6>
+                        <p class="small text-muted mb-0">
+                          Find locations by area or site. For example:
+                          <br>• <span class="badge bg-light text-dark border-secondary-subtle border">North Lincs</span>
+                          (Elizabeth Quarter/Great Oaks)
+                          <br>• <span class="badge bg-light text-dark border-secondary-subtle border">Rotherham</span>
+                          (Swallownest/Badsley Moor)
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-5 p-4" style="background-color: rgba(220, 53, 69, 0.05);">
+                    <div class="d-flex">
+                      <div
+                        class="bg-white rounded-3 p-2 me-3 shadow-sm d-flex align-items-center justify-content-center"
+                        style="width: 45px; height: 45px;">
+                        <i class="bi bi-exclamation-triangle-fill text-danger fs-5"></i>
+                      </div>
+                      <div>
+                        <h6 class="fw-bold text-danger mb-1">External Bookings</h6>
+                        <p class="small text-muted mb-0">
+                          A standard room rate applies. Ensure you have
+                          <strong>budget holder</strong> approval before confirming.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2 text-end d-none d-md-block mt-2">
+          <div class="p-3 bg-danger bg-opacity-10 rounded-4 border-start border-danger border-4 d-inline-block">
+            <i class="bi bi-geo-alt display-6 text-danger"></i>
+          </div>
+        </div>
+      </div>
+      <div class="container py-4">
+        <div class="row mb-5">
+          <div class="col-12">
+            <ul class="nav nav-pills nav-fill bg-light p-2 rounded-pill shadow-sm" id="venueTabs">
+              <li class="nav-item">
+                <button class="nav-link active py-3 fw-bold rounded-pill venue-filter-btn"
+                  onclick="filterByVenueType('trust', this)">
+                  <i class="bi bi-building me-2"></i>Trust Training Rooms
+                </button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link py-3 fw-bold rounded-pill venue-filter-btn"
+                  onclick="filterByVenueType('community', this)">
+                  <i class="bi bi-people me-2"></i>Community Venues
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-4 p-3 bg-white">
+              <div class="input-group">
+                <span class="input-group-text bg-light border-0"><i class="bi bi-search text-danger"></i></span>
+                <input type="text" id="mrSearchInput" class="form-control border-0 bg-light"
+                  placeholder="Search rooms in this category..." onkeyup="filterRooms()">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0" id="mrTable">
+                <thead class="bg-danger text-white">
+                  <tr>
+                    <th class="bg-danger py-3 px-4" style="width: 15%;">Site & Venue</th>
+                    <th class="bg-danger py-3" style="width: 15%;">Contact</th>
+                    <th class="bg-danger py-3" style="width: 20%;">Address</th>
+                    <th class="bg-danger py-3" style="width: 35%;">Room Name & Features</th>
+                    <th class="bg-danger py-3 text-center" style="width: 15%;">Capacity</th>
+                  </tr>
+                </thead>
+                <tbody id="mrTableBody" class="bg-white">
+                </tbody>
+              </table>
+            </div>
+            <div id="mrNoResults" class="p-5 text-center d-none">
+              <i class="bi bi-info-circle display-4 text-muted"></i>
+              <p class="mt-3 text-muted">No matching venues found. Try adjusting your filter.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="alert alert-info border-0 rounded-4 shadow-sm p-4 d-flex align-items-start">
+            <i class="bi bi-exclamation-triangle-fill fs-3 me-3"></i>
+            <div>
+              <h6 class="fw-bold">Booking Information</h6>
+              <p class="small mb-0">Please note that booking procedures vary by site. Use the contact details
+                provided
+                in the directory to confirm availability and equipment requirements (e.g., projectors, flipcharts,
+                clinical supplies).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================
+  = FAQs SECTION =
+  ========================================================= -->
+  <div id="FAQs" class="page">
+    <div class="container py-4">
+
+      <div class="row mb-4">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light p-3 rounded-pill shadow-sm">
+              <li class="breadcrumb-item"><a href="#" onclick="showPage('home');" class="text-decoration-none"><i
+                    class="bi bi-house-door"></i> Hub</a></li>
+              <li class="breadcrumb-item active fw-bold text-secondary" aria-current="page">FAQs & Support</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row align-items-start mb-5 text-center text-md-start">
+        <div class="col-md-10">
+          <h1 class="display-5 fw-bold text-dark">How can we help?</h1>
+          <p class="lead text-muted">Find answers to common questions about ESR, training, and room bookings.</p>
+        </div>
+
+        <div class="col-md-2 text-end d-none d-md-block mt-2">
+          <div class="p-3 bg-secondary bg-opacity-10 rounded-4 border-start border-secondary border-4 d-inline-block">
+            <i class="bi bi-question-circle-fill display-6 text-secondary"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-12">
+
+          <div class="card mb-4 border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-header bg-primary text-white fw-bold py-3">
+              <i class="bi bi-cpu me-2"></i> Technical & Account Support
+            </div>
+            <div class="card-body p-4">
+              <div class="mb-3">
+                <p class="fw-bold mb-1">I’m having technical problems. Who do I contact?</p>
+                <p class="mb-0 text-muted small">The IT staff portal has a Get Help With I.T section to support you with
+                  your query.</p>
+              </div>
+              <hr class="opacity-10">
+              <div class="mb-3">
+                <p class="fw-bold mb-1">I forgot my ESR login, or ESR will not load. What do I do?</p>
+                <p class="mb-0 text-muted small">Email: <a
+                    href="mailto:rdash.workforcesystems@nhs.net">rdash.workforcesystems@nhs.net</a></p>
+              </div>
+              <hr class="opacity-10">
+              <div class="mb-3">
+                <p class="fw-bold mb-1">Do I need to be logged in to ESR to join a course?</p>
+                <p class="mb-0 text-muted small">Yes. When you try to book a course, the system will ask you to log
+                  in.
+                </p>
+              </div>
+              <hr class="opacity-10">
+              <div class="mb-0">
+                <p class="fw-bold mb-1">Can I use the learning hub on my mobile?</p>
+                <p class="mb-0 text-muted small">Yes. You can use it if you have the link.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-4 border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-header bg-success text-white fw-bold py-3">
+              <i class="bi bi-mortarboard me-2"></i> Finding & Managing Your Training
+            </div>
+            <div class="card-body p-4">
+              <div class="mb-3">
+                <p class="fw-bold mb-1">Where do I find my mandatory training (MAST)?</p>
+                <p class="mb-0 text-muted small">Search for MAST in the Course Prospectus (Learner Catalogue panel).
+                </p>
+              </div>
+              <hr class="opacity-10">
+              <div class="mb-3">
+                <p class="fw-bold mb-1">How do I find courses and join them?</p>
+                <p class="mb-0 text-muted small">Go to the Learner panel for help and the user guide.</p>
+              </div>
+              <hr class="opacity-10">
+              <div class="mb-3">
+                <p class="fw-bold mb-1">Where can I see the courses I’m booked on, past courses, and my
+                  certificates?
+                </p>
+                <p class="mb-0 text-muted small">You can see all of these in ESR, just like before.</p>
+              </div>
+              <hr class="opacity-10">
+              <div class="mb-3">
+                <p class="fw-bold mb-1">How do I book myself onto face-to-face (non-MAST) training?</p>
+                <p class="mb-0 text-muted small">Go to the Learner panel for help and the user guide.</p>
+              </div>
+              <hr class="opacity-10">
+              <div class="mb-3">
+                <p class="fw-bold mb-1">Can I watch a training session after it has finished?</p>
+                <p class="mb-0 text-muted small">If it was recorded, it will be in the Video Vault panel once
+                  uploaded.
+                </p>
+              </div>
+              <hr class="opacity-10">
+              <div class="mb-0">
+                <p class="fw-bold mb-1">Has my ESR changed because of the new learning hub?</p>
+                <p class="mb-0 text-muted small">No. Nothing has changed. The hub just helps you find the right ESR
+                  pages more quickly.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-4 border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-header bg-warning text-dark fw-bold py-3">
+              <i class="bi bi-person-gear me-2"></i> Educators, Managers & Special Roles
+            </div>
+            <div class="card-body p-4">
+              <div class="mb-3">
+                <p class="fw-bold mb-1">I am a manager. How do I book a course for someone in my team?</p>
+                <p class="mb-0 text-muted small">Go to the Educator panel for help and the user guide.</p>
+              </div>
+              <hr class="opacity-10">
+              <div class="mb-3">
+                <p class="fw-bold mb-1">I want to run a training session. What do I do?</p>
+                <p class="mb-0 text-muted small">Go to the Educator panel for help and the user guide.</p>
+              </div>
+              <hr class="opacity-10">
+              <div class="mb-3">
+                <p class="fw-bold mb-1">How do I book a training room?</p>
+                <p class="mb-0 text-muted small">Go to the Training Rooms panel for more information.</p>
+              </div>
+              <hr class="opacity-10">
+              <div class="mb-0">
+                <p class="fw-bold mb-1">Do I need to use the volunteer panel?</p>
+                <p class="mb-0 text-muted small">No. Only volunteers need to use this panel.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+   = Feedback =
+    ========================================================= -->
+  <div id="feedback" class="page">
+    <div class="container py-4">
+
+      <div class="row mb-4">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light p-3 rounded-pill shadow-sm">
+              <li class="breadcrumb-item">
+                <a href="#" onclick="showPage('home');" class="text-decoration-none">
+                  <i class="bi bi-house-door"></i> Hub
+                </a>
+              </li>
+              <li class="breadcrumb-item active fw-bold" style="color: #006666;" aria-current="page">Feedback & Requests
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row align-items-start mb-5">
+        <div class="col-md-10">
+          <h1 class="display-5 fw-bold text-dark">Your Thoughts Matter</h1>
+          <p class="lead text-muted">Help us shape the future of your learning. From the quality of our training videos
+            and coursesto the features of the Resource Hub, your feedback is the most valuable tool we have. Select a
+            category below to let us know what’s working and where we can improve.</p>
+        </div>
+        <div class="col-md-2 text-end d-none d-md-block mt-2">
+          <div class="p-3 border-start border-4 rounded-4 shadow-sm d-inline-block"
+            style="border-color: #006666 !important; background-color: rgba(0, 102, 102, 0.05);">
+            <i class="bi bi-chat-left-heart display-6" style="color: #006666;"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+
+            <div class="card-header p-0 border-0">
+              <ul class="nav nav-tabs nav-fill bg-light" id="feedbackTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active py-3 fw-bold border-0" id="course-feedback-tab" data-bs-toggle="tab"
+                    data-bs-target="#course-feedback-panel" type="button" role="tab" style="color: #006666;">
+                    <i class="bi bi-journal-check me-2"></i>Course Feedback
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link py-3 fw-bold border-0" id="hub-feedback-tab" data-bs-toggle="tab"
+                    data-bs-target="#hub-feedback-panel" type="button" role="tab" style="color: #006666;">
+                    <i class="bi bi-cpu me-2"></i>Hub Feedback
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <div class="card-body p-0 bg-white">
+              <div class="tab-content" id="feedbackTabsContent">
+
+                <div class="tab-pane fade show active" id="course-feedback-panel" role="tabpanel"
+                  aria-labelledby="course-feedback-tab">
+                  <div class="ratio ratio-16x9" style="min-height: 650px;">
+                    <iframe
+                      src="https://forms.office.com/Pages/ResponsePage.aspx?id=slTDN7CF9UeyIge0jXdO4wCgmkbDmphKiCw7whYtnEdUNzg0MEZSVFExTEpRSE9XUzhIU0ZDWTZEVS4u&embed=true"
+                      frameborder="0" width="100%" height="100%">
+                    </iframe>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade" id="hub-feedback-panel" role="tabpanel" aria-labelledby="hub-feedback-tab">
+                  <div class="ratio ratio-16x9" style="min-height: 650px;">
+                    <iframe
+                      src="https://forms.office.com/Pages/ResponsePage.aspx?id=slTDN7CF9UeyIge0jXdO4wCgmkbDmphKiCw7whYtnEdUQThRNUhJVEpKREsxTDBXRlFITDdONEJWNS4u&embed=true"
+                      frameborder="0" width="100%" height="100%">
+                    </iframe>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- ======================================================
+ = Informal Learning SECTION =
+ ========================================================= 
+  <div id="Informal_Learning" class="page">
+    <div class="container py-4">
+
+      <div class="row mb-4">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light p-3 rounded-pill shadow-sm">
+              <li class="breadcrumb-item">
+                <a href="#" onclick="showPage('home');" class="text-decoration-none">
+                  <i class="bi bi-house-door"></i> Hub
+                </a>
+              </li>
+              <li class="breadcrumb-item active fw-bold" style="color: #20c997;" aria-current="page">Informal
+                Learning
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row align-items-start mb-5">
+        <div class="col-md-10">
+          <h1 class="display-5 fw-bold text-dark">Informal Learning</h1>
+          <p class="lead text-muted">Not all learning happens in a classroom. Discover opportunities for shadowing,
+            coaching, and peer-to-peer growth.</p>
+        </div>
+
+        <div class="col-md-2 text-end d-none d-md-block mt-2">
+          <div class="p-3 border-start border-4 rounded-4 shadow-sm d-inline-block"
+            style="border-color: #20c997 !important; background-color: rgba(32, 201, 151, 0.05);">
+            <i class="bi bi-lightbulb-fill display-6" style="color: #20c997;"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-lg-7">
+
+          <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-teal-soft p-3 rounded-3 me-3" style="background-color: rgba(32, 201, 151, 0.1);">
+                  <i class="bi bi-eye text-teal" style="color: #20c997; font-size: 1.5rem;"></i>
+                </div>
+                <h4 class="fw-bold mb-0">Shadowing & Work Visits</h4>
+              </div>
+              <p class="text-muted">Interested in how another team works? Shadowing is a great way to build your
+                network
+                and understand patient journeys across different services.</p>
+              <ul class="small text-muted mb-4">
+                <li>Gain insight into different clinical or administrative roles.</li>
+                <li>Build stronger working relationships between departments.</li>
+                <li>Identify potential career paths within the trust.</li>
+              </ul>
+              <div class="p-3 rounded-3 bg-light border-start border-4" style="border-color: #20c997 !important;">
+                <p class="small mb-0"><strong>How to apply:</strong> Discuss your interest with your Line Manager.
+                  Once
+                  approved, reach out to the department lead to arrange a suitable date.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-teal-soft p-3 rounded-3 me-3" style="background-color: rgba(32, 201, 151, 0.1);">
+                  <i class="bi bi-people text-teal" style="color: #20c997; font-size: 1.5rem;"></i>
+                </div>
+                <h4 class="fw-bold mb-0">Coaching & Mentoring</h4>
+              </div>
+              <p class="text-muted">Unlock your potential through 1-on-1 conversations. Whether you are looking for
+                career guidance or help with a specific challenge, the trust has a network of trained coaches.</p>
+              <div class="row g-2">
+                <div class="col-sm-6">
+                  <div class="p-3 border rounded-3 h-100">
+                    <h6 class="fw-bold">Coaching</h6>
+                    <p class="small text-muted mb-0">Task-focused, performance-driven sessions to help you reach a
+                      specific goal.</p>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="p-3 border rounded-3 h-100">
+                    <h6 class="fw-bold">Mentoring</h6>
+                    <p class="small text-muted mb-0">Longer-term relationship focused on overall career growth and
+                      wisdom sharing.</p>
+                  </div>
+                </div>
+              </div>
+              <a href="mailto:learninganddevelopment@rdash.nhs.uk" class="btn btn-outline-teal mt-3 rounded-pill"
+                style="color: #20c997; border-color: #20c997;">Find a Coach</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="sticky-top" style="top: 20px;">
+
+            <div class="card border-0 shadow-sm rounded-4 mb-4 bg-dark text-white">
+              <div class="card-body p-4">
+                <h5 class="fw-bold mb-3"><i class="bi bi-journal-text me-2"></i>Log Your Learning</h5>
+                <p class="small opacity-75">Informal learning counts! Use the trust reflection template to record
+                  your
+                  shadowing or peer learning for your professional portfolio.</p>
+                <hr class="opacity-25">
+                <div class="mb-3">
+                  <div class="fw-bold small mb-1">Peer Discussion</div>
+                  <div class="progress" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 100%; background-color: #20c997;">
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <div class="fw-bold small mb-1">Reflective Journaling</div>
+                  <div class="progress" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 100%; background-color: #20c997;">
+                    </div>
+                  </div>
+                </div>
+                <a href="Assets/Reflection_Template.docx" class="btn btn-light w-100 rounded-pill fw-bold">
+                  <i class="bi bi-download me-2"></i>Download Template
+                </a>
+              </div>
+            </div>
+
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+              <div class="card-header bg-light fw-bold py-3">
+                <i class="bi bi-link-45deg me-2"></i>Quick Resources
+              </div>
+              <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action small py-3">
+                  <i class="bi bi-book me-2 text-muted"></i>Journal Clubs & Research Groups
+                </a>
+                <a href="#" class="list-group-item list-group-item-action small py-3">
+                  <i class="bi bi-briefcase me-2 text-muted"></i>Leadership Apprenticeships
+                </a>
+                <a href="#" class="list-group-item list-group-item-action small py-3">
+                  <i class="bi bi-patch-check me-2 text-muted"></i>Professional Revalidation Support
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================
+  = MAST SECTION =
+  ========================================================= -->
+  <div id="MAST_Training" class="page">
+    <div class="container py-4">
+
+      <div class="row mb-4">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light p-3 rounded-pill shadow-sm">
+              <li class="breadcrumb-item"><a href="#" onclick="showPage('home');" class="text-decoration-none"><i
+                    class="bi bi-house-door"></i> Hub</a></li>
+              <li class="breadcrumb-item active fw-bold" style="color: #d35400;" aria-current="page">MAST Guide</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row align-items-start mb-5 text-center text-md-start">
+        <div class="col-md-10">
+          <h1 class="display-5 fw-bold text-dark">Statutory & Mandatory Training (MAST)</h1>
+          <p class="lead text-muted">
+            Essential Compliance: Follow this guide to ensure you remain up to date with
+            Mandatory Training requirements. <strong>Please note: this guide is specifically for MAST
+              competencies and courses.</strong>
+          </p>
+        </div>
+
+        <div class="col-md-2 text-end d-none d-md-block mt-2">
+          <div class="p-3 rounded-4 border-start border-4 d-inline-block"
+            style="background-color: rgba(211, 84, 0, 0.1); border-color: #d35400 !important;">
+            <i class="bi bi-shield-check display-6" style="color: #d35400;"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <iframe src="https://scribehow.com/embed/How_to_Use_the_Compliance_Portlet__7nQX-6cJTjGyOCClCHjqCA"
+            width="100%" height="679" allow="fullscreen"
+            style="aspect-ratio: 1 / 1; border: 0; min-height: 480px"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Modal-->
+  <div class="modal fade" id="classModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+
+        <div class="modal-header border-0 pb-0">
+          <div class="d-flex align-items-center">
+            <div class="bg-primary bg-opacity-10 p-2 rounded-3 me-3">
+              <i class="bi bi-journal-bookmark-fill text-primary fs-4"></i>
+            </div>
+            <h5 class="modal-title fw-bold text-dark" id="modalTitle">Course Details</h5>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-4">
+          <div id="modalDetails">
+          </div>
+        </div>
+
+        <div class="modal-footer border-0 pt-0 pb-4 px-4 justify-content-between">
+          <button type="button" class="btn btn-light rounded-pill px-4 text-muted fw-bold" data-bs-toggle="modal"
+            data-bs-target="#classModal">
+            <i class="bi bi-x-lg me-1"></i> Close
+          </button>
+          <a id="modalLink" href="#" target="_blank" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow-sm"
+            style="display:none;">
+            Book on ESR <i class="bi bi-arrow-right-short ms-1"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+  = Additional Learning & External Platforms SECTION =
+  ========================================================= -->
+  <div id="External_Learning" class="page">
+    <div class="container py-4">
+
+      <!-- Breadcrumb -->
+      <div class="row mb-4">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light p-3 rounded-pill shadow-sm">
+              <li class="breadcrumb-item"><a href="#" onclick="showPage('home');" class="text-decoration-none"><i
+                    class="bi bi-house-door"></i> Hub</a></li>
+              <li class="breadcrumb-item active fw-bold text-primary" aria-current="page">Additional Learning &
+                External Platforms</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Section Header -->
+      <div class="row align-items-start mb-5">
+        <div class="col-md-10">
+          <h1 class="display-5 fw-bold text-dark">Additional Learning Platforms</h1>
+          <p class="lead text-muted">Access external training platforms. Complete your courses directly on the
+            platform, then log your 'additional learning' record on ESR.</p>
+        </div>
+        <div class="col-md-2 text-end d-none d-md-block mt-2">
+          <div class="p-3 bg-primary bg-opacity-10 rounded-4 border-start border-primary border-4 d-inline-block">
+            <i class="bi bi-globe display-6 text-primary"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Platform Containers Row -->
+      <div class="row g-4">
+
+        <!-- Open University Container -->
+        <div class="col-md-6">
+          <div
+            class="card h-100 border-0 shadow-sm rounded-4 p-4 d-flex flex-column border-top border-primary border-4">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-primary bg-opacity-10 p-3 rounded-3 me-3">
+                <i class="bi bi-mortarboard-fill text-primary fs-3"></i>
+              </div>
+              <div>
+                <h4 class="fw-bold text-dark mb-0">Open University</h4>
+                <span class="small text-muted">External Learning Platform</span>
+              </div>
+            </div>
+            <p class="text-muted mb-4">
+              Staff sign up and complete courses using the Open University registration process. Once finished, record
+              your completion as 'additional learning' on ESR.
+            </p>
+            <div class="mt-auto d-grid gap-2">
+              <a href="Assets/OU_User_Guide.pdf" target="_blank"
+                class="btn btn-outline-primary rounded-pill btn-sm fw-bold">
+                <i class="bi bi-file-earmark-text me-2"></i>User Guide
+              </a>
+              <a href="https://my.esr.nhs.uk" target="_blank"
+                class="btn btn-outline-success rounded-pill btn-sm fw-bold">
+                <i class="bi bi-box-arrow-up-right me-2"></i>ESR (Record Learning)
+              </a>
+              <a href="https://www.open.edu" target="_blank" class="btn btn-primary rounded-pill btn-sm fw-bold">
+                <i class="bi bi-globe me-2"></i>Open University Platform
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Future Placeholder Container (Ready for the next external platform) -->
+        <div class="col-md-6">
+          <div
+            class="card h-100 border-0 shadow-sm rounded-4 p-4 d-flex flex-column border-top border-secondary border-4 bg-light">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-secondary bg-opacity-10 p-3 rounded-3 me-3">
+                <i class="bi bi-plus-circle text-secondary fs-3"></i>
+              </div>
+              <div>
+                <h4 class="fw-bold text-dark mb-0">Future Platform</h4>
+                <span class="small text-muted">Coming Soon</span>
+              </div>
+            </div>
+            <p class="text-muted mb-4">
+              Placeholder container for any future external learning providers added to the hub. Easily duplicated
+              with its own 3-button configuration.
+            </p>
+            <div class="mt-auto d-grid gap-2">
+              <button class="btn btn-outline-secondary rounded-pill btn-sm fw-bold" disabled>
+                <i class="bi bi-file-earmark-text me-2"></i>User Guide
+              </button>
+              <button class="btn btn-outline-secondary rounded-pill btn-sm fw-bold" disabled>
+                <i class="bi bi-box-arrow-up-right me-2"></i>ESR (Record Learning)
+              </button>
+              <button class="btn btn-secondary rounded-pill btn-sm fw-bold" disabled>
+                <i class="bi bi-globe me-2"></i>Platform Link
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <footer class="mt-auto py-5 border-top bg-light">
+    <div class="container text-center">
+
+      <div class="row mb-4">
+        <div class="col">
+          <img src="https://assets.codepen.io/8889025/RDaSH_LMRH4.png" class="footer-logo"
+            style="max-height: 100px; opacity: 1;">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <h6 class="text-uppercase fw-bold text-info mb-1" style="font-size: 0.75rem; letter-spacing: 2px;">
+            RDaSH Learning Matters
+          </h6>
+          <p class="small text-muted mb-0">Learning Resource Hub &copy; 2026</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-sm btn-outline-secondary rounded-pill px-3"
+            onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <i class="bi bi-arrow-up me-1"></i> Back to Top
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- JS libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  <script src="script/script.js" defer></script>
+  <script>
+
+
+  </script>
+</body>
+
+</html>
