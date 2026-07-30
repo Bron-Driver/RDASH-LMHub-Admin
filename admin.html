@@ -44,15 +44,17 @@
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-2 mb-1 text-muted text-uppercase fw-bold">
           <span>Manage Data</span>
         </h6>
-        <ul class="nav flex-column mb-2" id="sidebarNav">
+        <ul class="nav flex-column mb-auto" id="sidebarNav">
           <li class="nav-item">
-            <a class="nav-link active py-3" href="#" onclick="switchTab('ClassList.json', 'Classes (Calendar)')">
-              <i class="bi bi-calendar-event me-2"></i> Classes (Calendar)
+            <a class="nav-link active" href="#" onclick="switchTab('CourseDescriptions.json', 'Course Descriptions')">
+              <i class="bi bi-journal-text me-2"></i>
+              Course Descriptions
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link py-3" href="#" onclick="switchTab('CourseDescriptions.json', 'Course Descriptions')">
-              <i class="bi bi-journal-text me-2"></i> Course Descriptions
+            <a class="nav-link" href="#" onclick="switchTab('ClassList.json', 'Classes (Calendar)')">
+              <i class="bi bi-calendar-event me-2"></i>
+              Classes (Calendar)
             </a>
           </li>
           <li class="nav-item">
@@ -146,9 +148,11 @@
       <div class="modal-body p-4">
         <form id="classForm">
           <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label fw-bold">Course Title (Main Name) <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" id="fc_Course" required>
+            <div class="mb-3">
+              <label for="fc_Course" class="form-label">Course Title (Main Name) <span class="text-danger">*</span></label>
+              <select class="form-select" id="fc_Course" required>
+                <option value="" disabled selected>Loading courses...</option>
+              </select>
             </div>
             <div class="col-md-6">
               <label class="form-label fw-bold">Display Title <span class="text-danger">*</span></label>
@@ -214,9 +218,12 @@
       <div class="modal-body p-4">
         <form id="courseForm">
           <div class="row g-3">
-            <div class="col-md-12">
+            <div class="mb-3">
               <label class="form-label fw-bold">Course Name <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" id="f_Course" required>
+              <select class="form-select" id="f_Course_select" required>
+                <option value="" disabled selected>Loading courses...</option>
+              </select>
+              <input type="text" class="form-control d-none" id="f_Course_text">
             </div>
             <div class="col-md-12">
               <label class="form-label fw-bold">Description</label>
@@ -252,6 +259,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="admin.js?v=3"></script>
+<script src="admin.js?v=4"></script>
 </body>
 </html>

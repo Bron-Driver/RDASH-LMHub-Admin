@@ -4,8 +4,9 @@ const GITHUB_REPO = 'RDASH-LMHub-Admin';
 let ghToken = (localStorage.getItem('ghToken') || '').trim().replace(/[\r\n]/g, '');
 let currentData = [];
 let fileSha = '';
-let currentFile = 'ClassList.json'; // Default
+let currentFile = 'CourseDescriptions.json'; // Default
 let editingIndex = null;
+let masterCourseList = [];
 
 // Utf-8 safe base64 encoding/decoding
 function utf8_to_b64(str) {
@@ -33,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('repoStatus').classList.replace('bg-secondary', 'bg-success');
     document.getElementById('dashboard').classList.remove('d-none');
     document.getElementById('setupPrompt').classList.add('d-none');
-    loadData();
+    fetchMasterCourses().then(() => loadData());
   } else {
     document.getElementById('setupPrompt').classList.remove('d-none');
   }
@@ -53,7 +54,7 @@ function saveSettings() {
     document.getElementById('repoStatus').classList.replace('bg-secondary', 'bg-success');
     document.getElementById('dashboard').classList.remove('d-none');
     document.getElementById('setupPrompt').classList.add('d-none');
-    loadData();
+    fetchMasterCourses().then(() => loadData());
   } else {
     localStorage.removeItem('ghToken');
     document.getElementById('repoStatus').textContent = 'Not Connected';
@@ -82,7 +83,55 @@ function switchTab(filename, title) {
   document.querySelectorAll('#sidebarNav .nav-link').forEach(el => el.classList.remove('active'));
   event.currentTarget.classList.add('active');
 
-  loadData();
+  if (masterCourseList.length === 0) {
+    fetchMasterCourses().then(() => loadData());
+  } else {
+    loadData();
+  }
+}
+
+async function fetchMasterCourses() {
+  if (!ghToken) return;
+  try {
+    const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/Data/CourseDescriptions.json?ref=master&t=${Date.now()}`;
+    const response = await fetch(url, {
+      cache: 'no-store',
+      headers: {
+        'Authorization': `Bearer ${ghToken}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+    if (response.ok) {
+      const data = await response.json();
+      const content = b64_to_utf8(data.content);
+      const parsedData = JSON.parse(content);
+      masterCourseList = [...new Set(parsedData.map(item => item.Course).filter(Boolean))].sort();
+    }
+  } catch (error) {
+    console.error("Failed to fetch master courses", error);
+  }
+}
+
+function populateCourseDropdown(selectId, selectedValue = '') {
+  const selectElement = document.getElementById(selectId);
+  selectElement.innerHTML = '<option value="" disabled selected>Select a Course...</option>';
+  masterCourseList.forEach(course => {
+    const option = document.createElement('option');
+    option.value = course;
+    option.textContent = course;
+    if (course === selectedValue) {
+      option.selected = true;
+    }
+    selectElement.appendChild(option);
+  });
+  
+  if (selectedValue && !masterCourseList.includes(selectedValue)) {
+    const option = document.createElement('option');
+    option.value = selectedValue;
+    option.textContent = selectedValue + ' (Not in Master List)';
+    option.selected = true;
+    selectElement.appendChild(option);
+  }
 }
 
 async function loadData() {
@@ -187,10 +236,23 @@ function showAddForm() {
   editingIndex = null;
   if (currentFile === 'ClassList.json') {
     document.getElementById('classForm').reset();
+    populateCourseDropdown('fc_Course');
     document.getElementById('classModalTitle').textContent = 'Add New Class';
     new bootstrap.Modal(document.getElementById('classModal')).show();
   } else {
     document.getElementById('courseForm').reset();
+    if (currentFile === 'CourseDescriptions.json') {
+      document.getElementById('f_Course_select').classList.add('d-none');
+      document.getElementById('f_Course_text').classList.remove('d-none');
+      document.getElementById('f_Course_text').required = true;
+      document.getElementById('f_Course_select').required = false;
+    } else {
+      document.getElementById('f_Course_select').classList.remove('d-none');
+      document.getElementById('f_Course_text').classList.add('d-none');
+      document.getElementById('f_Course_select').required = true;
+      document.getElementById('f_Course_text').required = false;
+      populateCourseDropdown('f_Course_select');
+    }
     document.getElementById('courseModalTitle').textContent = 'Add New Item';
     new bootstrap.Modal(document.getElementById('courseModal')).show();
   }
@@ -201,7 +263,7 @@ function editItem(index) {
   const item = currentData[index];
 
   if (currentFile === 'ClassList.json') {
-    document.getElementById('fc_Course').value = item['Course'] || '';
+    populateCourseDropdown('fc_Course', item['Course']);
     document.getElementById('fc_Title').value = item['Title'] || '';
     document.getElementById('fc_OfferingName').value = item['Offering Name'] || '';
     document.getElementById('fc_Mode').value = item['Delivery Mode'] || 'Online';
@@ -215,7 +277,19 @@ function editItem(index) {
     document.getElementById('classModalTitle').textContent = 'Edit Class';
     new bootstrap.Modal(document.getElementById('classModal')).show();
   } else {
-    document.getElementById('f_Course').value = item['Course'] || '';
+    if (currentFile === 'CourseDescriptions.json') {
+      document.getElementById('f_Course_select').classList.add('d-none');
+      document.getElementById('f_Course_text').classList.remove('d-none');
+      document.getElementById('f_Course_text').required = true;
+      document.getElementById('f_Course_select').required = false;
+      document.getElementById('f_Course_text').value = item['Course'] || '';
+    } else {
+      document.getElementById('f_Course_select').classList.remove('d-none');
+      document.getElementById('f_Course_text').classList.add('d-none');
+      document.getElementById('f_Course_select').required = true;
+      document.getElementById('f_Course_text').required = false;
+      populateCourseDropdown('f_Course_select', item['Course']);
+    }
     document.getElementById('f_Description').value = item['Description'] || '';
     document.getElementById('f_TargetAudience').value = item['TargetAudience'] || '';
     document.getElementById('f_Trainer').value = item['Trainer'] || '';
@@ -259,8 +333,12 @@ async function saveItem() {
     }
     btnId = 'btnSaveClass';
   } else {
+    const courseValue = currentFile === 'CourseDescriptions.json' 
+      ? document.getElementById('f_Course_text').value.trim() 
+      : document.getElementById('f_Course_select').value;
+      
     newItem = {
-      "Course": document.getElementById('f_Course').value.trim(),
+      "Course": courseValue,
       "Description": document.getElementById('f_Description').value.trim(),
       "TargetAudience": document.getElementById('f_TargetAudience').value.trim(),
       "Trainer": document.getElementById('f_Trainer').value.trim(),
