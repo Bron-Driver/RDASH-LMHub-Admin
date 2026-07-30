@@ -32,11 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (ghToken) {
     document.getElementById('repoStatus').textContent = 'Connected';
     document.getElementById('repoStatus').classList.replace('bg-secondary', 'bg-success');
-    document.getElementById('dashboard').classList.remove('d-none');
     document.getElementById('setupPrompt').classList.add('d-none');
-    fetchMasterCourses().then(() => loadData());
+    showWelcome();
+    fetchMasterCourses();
   } else {
     document.getElementById('setupPrompt').classList.remove('d-none');
+    document.getElementById('welcomeScreen').classList.add('d-none');
+    document.getElementById('dashboard').classList.add('d-none');
   }
 });
 
@@ -52,14 +54,15 @@ function saveSettings() {
     localStorage.setItem('ghToken', ghToken);
     document.getElementById('repoStatus').textContent = 'Connected';
     document.getElementById('repoStatus').classList.replace('bg-secondary', 'bg-success');
-    document.getElementById('dashboard').classList.remove('d-none');
     document.getElementById('setupPrompt').classList.add('d-none');
-    fetchMasterCourses().then(() => loadData());
+    showWelcome();
+    fetchMasterCourses();
   } else {
     localStorage.removeItem('ghToken');
     document.getElementById('repoStatus').textContent = 'Not Connected';
     document.getElementById('repoStatus').classList.replace('bg-success', 'bg-secondary');
     document.getElementById('dashboard').classList.add('d-none');
+    document.getElementById('welcomeScreen').classList.add('d-none');
     document.getElementById('setupPrompt').classList.remove('d-none');
   }
   bootstrap.Modal.getInstance(document.getElementById('settingsModal')).hide();
@@ -74,20 +77,33 @@ function showAlert(message, type = 'danger') {
   setTimeout(() => alertContainer.innerHTML = '', 5000);
 }
 
-function switchTab(filename, title) {
+function switchTab(filename, title, event) {
   currentFile = filename;
   document.getElementById('pageTitle').textContent = title;
   document.getElementById('searchInput').value = '';
   
-  // Update sidebar active state
-  document.querySelectorAll('#sidebarNav .nav-link').forEach(el => el.classList.remove('active'));
-  event.currentTarget.classList.add('active');
+  document.getElementById('welcomeScreen').classList.add('d-none');
+  document.getElementById('dashboard').classList.remove('d-none');
+  
+  if (event) {
+    document.querySelectorAll('#sidebarNav .nav-link').forEach(el => el.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+  }
 
   if (masterCourseList.length === 0) {
     fetchMasterCourses().then(() => loadData());
   } else {
     loadData();
   }
+}
+
+function showWelcome(event) {
+  if (event) {
+    document.querySelectorAll('#sidebarNav .nav-link').forEach(el => el.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+  }
+  document.getElementById('welcomeScreen').classList.remove('d-none');
+  document.getElementById('dashboard').classList.add('d-none');
 }
 
 async function fetchMasterCourses() {
