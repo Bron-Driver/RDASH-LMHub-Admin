@@ -1,4 +1,4 @@
-const GITHUB_OWNER = 'Bron-Driver';
+const GITHUB_OWNER = 'NHS-ESR-IAs';
 const GITHUB_REPO = 'RDASH-LMHub';
 
 let ghToken = localStorage.getItem('ghToken') || '';
