@@ -105,7 +105,10 @@ async function fetchMasterCourses() {
       const data = await response.json();
       const content = b64_to_utf8(data.content);
       const parsedData = JSON.parse(content);
-      masterCourseList = [...new Set(parsedData.map(item => item.Course).filter(Boolean))].sort();
+      masterCourseList = [...new Set(parsedData
+        .filter(item => !item.Archived)
+        .map(item => item.Course)
+        .filter(Boolean))].sort();
     }
   } catch (error) {
     console.error("Failed to fetch master courses", error);
@@ -174,10 +177,15 @@ function renderTable() {
   const tbody = document.getElementById('tableBody');
   const thead = document.getElementById('tableHeader');
   const query = document.getElementById('searchInput').value.toLowerCase();
+  const showArchived = document.getElementById('showArchived').checked;
 
   let filtered = currentData;
+  if (!showArchived) {
+    filtered = filtered.filter(item => !item.Archived);
+  }
+  
   if (query) {
-    filtered = currentData.filter(item => JSON.stringify(item).toLowerCase().includes(query));
+    filtered = filtered.filter(item => JSON.stringify(item).toLowerCase().includes(query));
   }
 
   if (currentFile === 'ClassList.json') {
@@ -189,13 +197,19 @@ function renderTable() {
     tbody.innerHTML = filtered.map((item) => {
       // Find original index for editing
       const originalIndex = currentData.indexOf(item);
+      const rowClass = item.Archived ? 'table-secondary text-muted' : '';
+      const archiveBadge = item.Archived ? ' <span class="badge bg-secondary ms-2">Archived</span>' : '';
+      const archiveIcon = item.Archived ? 'bi-box-arrow-up' : 'bi-archive-fill';
+      const archiveTitle = item.Archived ? 'Unarchive' : 'Archive';
+      
       return `
-        <tr>
-          <td><strong>${item.Title || item.Course || 'Untitled'}</strong></td>
+        <tr class="${rowClass}">
+          <td><strong>${item.Title || item.Course || 'Untitled'}</strong>${archiveBadge}</td>
           <td>${excelToDateString(item['Start Date'])}</td>
           <td>${item['Start Time'] || ''}</td>
           <td><span class="badge bg-info">${item['Delivery Mode'] || 'N/A'}</span></td>
           <td class="text-end">
+            <button class="btn btn-sm btn-light text-warning action-btn me-1" onclick="archiveItem(${originalIndex})" title="${archiveTitle}"><i class="bi ${archiveIcon}"></i></button>
             <button class="btn btn-sm btn-light text-primary action-btn me-1" onclick="editItem(${originalIndex})" title="Edit"><i class="bi bi-pencil-fill"></i></button>
             <button class="btn btn-sm btn-light text-danger action-btn" onclick="deleteItem(${originalIndex})" title="Delete"><i class="bi bi-trash-fill"></i></button>
           </td>
@@ -209,12 +223,18 @@ function renderTable() {
     
     tbody.innerHTML = filtered.map((item) => {
       const originalIndex = currentData.indexOf(item);
+      const rowClass = item.Archived ? 'table-secondary text-muted' : '';
+      const archiveBadge = item.Archived ? ' <span class="badge bg-secondary ms-2">Archived</span>' : '';
+      const archiveIcon = item.Archived ? 'bi-box-arrow-up' : 'bi-archive-fill';
+      const archiveTitle = item.Archived ? 'Unarchive' : 'Archive';
+      
       return `
-        <tr>
-          <td><strong>${item.Course || 'Untitled'}</strong></td>
+        <tr class="${rowClass}">
+          <td><strong>${item.Course || 'Untitled'}</strong>${archiveBadge}</td>
           <td>${item.TargetAudience || ''}</td>
           <td>${item.Trainer || ''}</td>
           <td class="text-end">
+            <button class="btn btn-sm btn-light text-warning action-btn me-1" onclick="archiveItem(${originalIndex})" title="${archiveTitle}"><i class="bi ${archiveIcon}"></i></button>
             <button class="btn btn-sm btn-light text-primary action-btn me-1" onclick="editItem(${originalIndex})" title="Edit"><i class="bi bi-pencil-fill"></i></button>
             <button class="btn btn-sm btn-light text-danger action-btn" onclick="deleteItem(${originalIndex})" title="Delete"><i class="bi bi-trash-fill"></i></button>
           </td>
@@ -310,6 +330,23 @@ async function deleteItem(index) {
   await pushToGitHub(`Deleted '${deletedItemName}' from ${currentFile}`);
 }
 
+async function archiveItem(index) {
+  const item = currentData[index];
+  const isArchiving = !item.Archived;
+  const itemName = currentFile === 'ClassList.json' ? item.Title : item.Course;
+  
+  if (!confirm(`Are you sure you want to ${isArchiving ? 'archive' : 'unarchive'} this item?`)) return;
+  
+  item.Archived = isArchiving;
+  
+  const success = await pushToGitHub(`${isArchiving ? 'Archived' : 'Unarchived'} '${itemName}' in ${currentFile}`);
+  
+  if (!success) {
+    // Rollback
+    item.Archived = !isArchiving;
+  }
+}
+
 async function saveItem() {
   let newItem = {};
   let btnId = '';
@@ -355,6 +392,7 @@ async function saveItem() {
   const originalDataStr = JSON.stringify(currentData);
 
   if (editingIndex !== null) {
+    newItem.Archived = currentData[editingIndex].Archived || false;
     currentData[editingIndex] = newItem;
   } else {
     currentData.push(newItem);
