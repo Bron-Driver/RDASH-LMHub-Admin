@@ -1,7 +1,7 @@
 const GITHUB_OWNER = 'Bron-Driver';
 const GITHUB_REPO = 'RDASH-LMHub-Admin';
 
-let ghToken = localStorage.getItem('ghToken') || '';
+let ghToken = (localStorage.getItem('ghToken') || '').trim().replace(/[\r\n]/g, '');
 let currentData = [];
 let fileSha = '';
 let currentFile = 'ClassList.json'; // Default
@@ -46,7 +46,7 @@ function openSettings() {
 }
 
 function saveSettings() {
-  ghToken = document.getElementById('ghToken').value.trim();
+  ghToken = document.getElementById('ghToken').value.trim().replace(/[\r\n]/g, '');
   if (ghToken) {
     localStorage.setItem('ghToken', ghToken);
     document.getElementById('repoStatus').textContent = 'Connected';
@@ -91,7 +91,10 @@ async function loadData() {
   tbody.innerHTML = '<tr><td colspan="6" class="text-center py-5"><div class="spinner-border text-primary" role="status"></div><br>Loading data...</td></tr>';
   
   try {
-    const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/Data/${currentFile}?ref=master`, {
+    const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/Data/${currentFile}?ref=master&t=${Date.now()}`;
+    console.log("Fetching from:", url);
+    
+    const response = await fetch(url, {
       headers: {
         'Authorization': `token ${ghToken}`,
         'Accept': 'application/vnd.github.v3+json',
@@ -108,7 +111,13 @@ async function loadData() {
     
     renderTable();
   } catch (error) {
-    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-danger">Error: ${error.message}</td></tr>`;
+    console.error("Fetch error details:", error);
+    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-danger">
+      <strong>Error: ${error.message}</strong><br><br>
+      <small class="text-muted">If this says "Failed to fetch", your browser blocked the connection.<br>
+      1. Ensure you have internet and aren't blocking GitHub API.<br>
+      2. Check your Personal Access Token in Settings to ensure it has no strange characters.</small>
+    </td></tr>`;
   }
 }
 
