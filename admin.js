@@ -189,7 +189,7 @@ function renderTable() {
   }
 
   if (currentFile === 'ClassList.json') {
-    thead.innerHTML = `<tr><th>Title</th><th>Date</th><th>Time</th><th>Mode</th><th class="text-end">Actions</th></tr>`;
+    thead.innerHTML = `<tr><th>Title</th><th>Date</th><th>Time</th><th>Mode</th><th class="text-end text-nowrap">Actions</th></tr>`;
     
     // Sort classes by date descending
     filtered.sort((a, b) => (b['Start Date'] || 0) - (a['Start Date'] || 0));
@@ -208,7 +208,7 @@ function renderTable() {
           <td>${excelToDateString(item['Start Date'])}</td>
           <td>${item['Start Time'] || ''}</td>
           <td><span class="badge bg-info">${item['Delivery Mode'] || 'N/A'}</span></td>
-          <td class="text-end">
+          <td class="text-end text-nowrap">
             <button class="btn btn-sm btn-light text-warning action-btn me-1" onclick="archiveItem(${originalIndex})" title="${archiveTitle}"><i class="bi ${archiveIcon}"></i></button>
             <button class="btn btn-sm btn-light text-primary action-btn me-1" onclick="editItem(${originalIndex})" title="Edit"><i class="bi bi-pencil-fill"></i></button>
             <button class="btn btn-sm btn-light text-danger action-btn" onclick="deleteItem(${originalIndex})" title="Delete"><i class="bi bi-trash-fill"></i></button>
@@ -219,7 +219,7 @@ function renderTable() {
 
   } else {
     // Courses, Video, QI
-    thead.innerHTML = `<tr><th>Course Name</th><th>Target Audience</th><th>Trainer</th><th class="text-end">Actions</th></tr>`;
+    thead.innerHTML = `<tr><th>Course Name</th><th>Target Audience</th><th>Trainer</th><th class="text-end text-nowrap">Actions</th></tr>`;
     
     tbody.innerHTML = filtered.map((item) => {
       const originalIndex = currentData.indexOf(item);
@@ -233,7 +233,7 @@ function renderTable() {
           <td><strong>${item.Course || 'Untitled'}</strong>${archiveBadge}</td>
           <td>${item.TargetAudience || ''}</td>
           <td>${item.Trainer || ''}</td>
-          <td class="text-end">
+          <td class="text-end text-nowrap">
             <button class="btn btn-sm btn-light text-warning action-btn me-1" onclick="archiveItem(${originalIndex})" title="${archiveTitle}"><i class="bi ${archiveIcon}"></i></button>
             <button class="btn btn-sm btn-light text-primary action-btn me-1" onclick="editItem(${originalIndex})" title="Edit"><i class="bi bi-pencil-fill"></i></button>
             <button class="btn btn-sm btn-light text-danger action-btn" onclick="deleteItem(${originalIndex})" title="Delete"><i class="bi bi-trash-fill"></i></button>
