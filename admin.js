@@ -95,10 +95,10 @@ async function loadData() {
     console.log("Fetching from:", url);
     
     const response = await fetch(url, {
+      cache: 'no-store',
       headers: {
-        'Authorization': `token ${ghToken}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Cache-Control': 'no-cache'
+        'Authorization': `Bearer ${ghToken}`,
+        'Accept': 'application/vnd.github.v3+json'
       }
     });
 
@@ -310,7 +310,7 @@ async function pushToGitHub(commitMessage) {
     const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/Data/${currentFile}`, {
       method: 'PUT',
       headers: {
-        'Authorization': `token ${ghToken}`,
+        'Authorization': `Bearer ${ghToken}`,
         'Accept': 'application/vnd.github.v3+json',
         'Content-Type': 'application/json'
       },
