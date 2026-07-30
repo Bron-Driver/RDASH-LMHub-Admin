@@ -84,29 +84,54 @@
       <!-- Welcome Screen -->
       <div id="welcomeScreen" class="py-4">
         <h1 class="display-5 fw-bold text-primary mb-3">Welcome to the Admin Centre! 👋</h1>
-        <p class="lead text-muted mb-5">This portal lets you easily manage the content on the live Learning Hub website. You don't need any technical skills to use it!</p>
+        <p class="lead text-muted mb-4">This portal lets you easily manage the content on the live Learning Hub website. You don't need any technical skills to use it!</p>
         
+        <div class="row g-4 mb-4">
+          <div class="col-12">
+            <div class="card shadow-sm border-0 bg-light">
+              <div class="card-body">
+                <h5 class="card-title text-dark"><i class="bi bi-map me-2"></i>Understanding the 4 Pages</h5>
+                <p class="card-text text-secondary mb-3">The sidebar on the left lets you switch between the four main sections of the live website:</p>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <strong>1. Course Descriptions:</strong> The master list of all available courses. Start here!
+                  </div>
+                  <div class="col-md-6">
+                    <strong>2. Classes (Calendar):</strong> Schedule specific dates and times for your courses.
+                  </div>
+                  <div class="col-md-6">
+                    <strong>3. Quality Improvement:</strong> Add projects and resources for the QI section.
+                  </div>
+                  <div class="col-md-6">
+                    <strong>4. Video Vault:</strong> Manage the library of educational videos.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="row g-4 mb-5">
           <div class="col-md-4">
             <div class="card h-100 shadow-sm border-0">
               <div class="card-body">
-                <h5 class="card-title text-success"><i class="bi bi-1-circle-fill me-2"></i>The Master List</h5>
-                <p class="card-text">The <strong>Course Descriptions</strong> tab is your master list. You must add a course here first before you can schedule classes for it. This ensures all spelling is perfectly consistent across the site!</p>
+                <h5 class="card-title text-success"><i class="bi bi-star-fill me-2"></i>The Golden Rule</h5>
+                <p class="card-text">Always add new courses to <strong>Course Descriptions</strong> first! Because it acts as the Master List, the other three pages will only let you select courses that already exist in that list.</p>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="card h-100 shadow-sm border-0">
               <div class="card-body">
-                <h5 class="card-title text-primary"><i class="bi bi-2-circle-fill me-2"></i>Managing Data</h5>
-                <p class="card-text">Use the buttons on the right side of any table to <strong>Edit</strong> or <strong>Delete</strong> an item. You can also <strong>Archive</strong> old items to hide them from the main lists without permanently deleting them.</p>
+                <h5 class="card-title text-primary"><i class="bi bi-pencil-square me-2"></i>Managing Data</h5>
+                <p class="card-text">Use the buttons on the right side of any table to <strong>Edit</strong> or <strong>Delete</strong> an item. Use the <strong>Archive</strong> button to hide old items without permanently deleting them.</p>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="card h-100 shadow-sm border-0">
               <div class="card-body">
-                <h5 class="card-title text-info"><i class="bi bi-3-circle-fill me-2"></i>Live Updates</h5>
+                <h5 class="card-title text-info"><i class="bi bi-cloud-arrow-up-fill me-2"></i>Live Updates</h5>
                 <p class="card-text">Whenever you click "Save", your changes are instantly sent to the live website. It usually takes about <strong>60 seconds</strong> for the public website to update after you save.</p>
               </div>
             </div>
@@ -115,7 +140,7 @@
 
         <div class="text-center">
           <button class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm" onclick="document.querySelector('a[onclick*=\\'CourseDescriptions.json\\']').click()">
-            Get Started <i class="bi bi-arrow-right ms-2"></i>
+            Go to Course Descriptions <i class="bi bi-arrow-right ms-2"></i>
           </button>
         </div>
       </div>
