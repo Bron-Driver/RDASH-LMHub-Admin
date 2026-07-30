@@ -254,6 +254,8 @@ function filterTable() {
 
 function showAddForm() {
   editingIndex = null;
+  document.querySelectorAll('.saveAndAddBtn').forEach(btn => btn.classList.remove('d-none'));
+  
   if (currentFile === 'ClassList.json') {
     document.getElementById('classForm').reset();
     populateCourseDropdown('fc_Course');
@@ -280,6 +282,7 @@ function showAddForm() {
 
 function editItem(index) {
   editingIndex = index;
+  document.querySelectorAll('.saveAndAddBtn').forEach(btn => btn.classList.add('d-none'));
   const item = currentData[index];
 
   if (currentFile === 'ClassList.json') {
@@ -347,7 +350,7 @@ async function archiveItem(index) {
   }
 }
 
-async function saveItem() {
+async function saveItem(addAnother = false) {
   let newItem = {};
   let btnId = '';
 
@@ -409,13 +412,23 @@ async function saveItem() {
     // Rollback
     currentData = JSON.parse(originalDataStr);
   } else {
-    // Hide modal on success
-    const modalId = currentFile === 'ClassList.json' ? 'classModal' : 'courseModal';
-    bootstrap.Modal.getInstance(document.getElementById(modalId)).hide();
+    if (addAnother) {
+      if (currentFile === 'ClassList.json') {
+        document.getElementById('classForm').reset();
+      } else {
+        document.getElementById('courseForm').reset();
+      }
+    } else {
+      // Hide modal on success
+      const modalId = currentFile === 'ClassList.json' ? 'classModal' : 'courseModal';
+      bootstrap.Modal.getInstance(document.getElementById(modalId)).hide();
+    }
   }
 
   btn.innerHTML = originalBtnHtml;
   btn.disabled = false;
+  
+  renderTable();
 }
 
 async function pushToGitHub(commitMessage) {
