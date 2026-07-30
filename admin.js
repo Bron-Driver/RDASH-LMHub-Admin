@@ -1,5 +1,5 @@
-const GITHUB_OWNER = 'NHS-ESR-IAs';
-const GITHUB_REPO = 'RDASH-LMHub';
+const GITHUB_OWNER = 'Bron-Driver';
+const GITHUB_REPO = 'RDASH-LMHub-Admin';
 
 let ghToken = localStorage.getItem('ghToken') || '';
 let currentData = [];
@@ -91,7 +91,7 @@ async function loadData() {
   tbody.innerHTML = '<tr><td colspan="6" class="text-center py-5"><div class="spinner-border text-primary" role="status"></div><br>Loading data...</td></tr>';
   
   try {
-    const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/Data/${currentFile}?ref=main`, {
+    const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/Data/${currentFile}?ref=master`, {
       headers: {
         'Authorization': `token ${ghToken}`,
         'Accept': 'application/vnd.github.v3+json',
@@ -309,7 +309,7 @@ async function pushToGitHub(commitMessage) {
         message: commitMessage,
         content: encodedContent,
         sha: fileSha,
-        branch: 'main'
+        branch: 'master'
       })
     });
 
