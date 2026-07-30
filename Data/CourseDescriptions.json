@@ -273,7 +273,6 @@
     "Venue": "Video",
     "CourseLink": "https://youtube.com/playlist?list=PL2_RtUzQeufPrXsnbIu8ld6lpwInjp1Td&si=rbVp_aaPbZ6TgWEZ"
   },
-
   {
     "Course": "An Introduction to ARFID",
     "Description": "An introductory session to Avoidant Restrictive Food Intake Disorder ",
@@ -492,5 +491,13 @@
     "ExternalLink": "",
     "ESRLink": "https://my.esr.nhs.uk/OA_HTML/OA.jsp?OAFunc=OTA_EXT_LEARNING_SS&pFromLink=LR&addBreadCrumb=Y&_ti=2062750877&oapc=2&oas=OboleNwUoNshUPRfx_lUMw..",
     "UserGuideLink": "#Learner_Guide"
+  },
+  {
+    "Course": "Test Course",
+    "Description": "Test",
+    "TargetAudience": "",
+    "Trainer": "",
+    "Venue": "",
+    "CourseLink": ""
   }
 ]
